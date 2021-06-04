@@ -1,9 +1,9 @@
 --******************************************************************************
 --	Filename:		SAYAC_register_file.vhd
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.900
+--  Version:		0.990
 --	History:
---	Date:			20 April 2021
+--	Date:			6 May 2021
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
@@ -55,7 +55,7 @@ ARCHITECTURE behaviour OF LLU IS
 BEGIN
 	outLLU <= (in1 AND in2) WHEN logicAND = '1' ELSE
 			  (NOT in1) WHEN onesComp = '1' ELSE
-			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(SIGNED(NOT in1)) + 1, 16))
+			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(NOT in1)) + 1, 16))
 			  WHEN twosComp = '1' ELSE 
 			  (OTHERS => 'Z');
 END ARCHITECTURE behaviour;
@@ -76,8 +76,8 @@ ARCHITECTURE behaviour OF ASU IS
 BEGIN
 	outASU <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) + 
 			  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithADD = '1' ELSE
-			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(SIGNED(in1)) - 
-			  TO_INTEGER(SIGNED(in2)), 16)) WHEN arithSUB = '1' ELSE
+			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) - 
+			  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithSUB = '1' ELSE
 			  (OTHERS => 'Z');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ ARCHITECTURE behaviour OF SHU IS
 		IF value2(4) = '0' THEN 
 			nums := TO_INTEGER(UNSIGNED(value2));
 		ELSE
-			nums := TO_INTEGER(SIGNED(NOT value2)) + 1;
+			nums := TO_INTEGER(UNSIGNED(NOT value2)) + 1;
 		END IF;
 		
 		RETURN nums;
@@ -125,7 +125,8 @@ BEGIN
 				outSHU(15 DOWNTO (15 - numofSH - 1)) <= (OTHERS => '0');
 			WHEN "101" =>						-- arithmetic left shift
 				outSHU(15 DOWNTO numofSH) <= in1((15 - numofSH) DOWNTO 0);
-				outSHU((numofSH - 1) DOWNTO 0) <= (OTHERS => in1(0));
+--				outSHU((numofSH - 1) DOWNTO 0) <= (OTHERS => in1(0));
+				outSHU((numofSH - 1) DOWNTO 0) <= (OTHERS => '0');
 			WHEN "110" =>						-- logic left shift
 				outSHU(15 DOWNTO numofSH) <= in1((15 - numofSH) DOWNTO 0);
 				outSHU((numofSH - 1) DOWNTO 0) <= (OTHERS => '0');
@@ -143,18 +144,20 @@ ENTITY MDU IS
 	PORT (
 		clk, rst, startMDU, arithMUL, arithDIV, ldMDU1, ldMDU2 : IN STD_LOGIC;
 		in1, in2          : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-		outMDU1, outMDU2 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)		
+		outMDU1, outMDU2 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		readyMDU : OUT STD_LOGIC
 	);
 END ENTITY MDU;
 
 ARCHITECTURE behaviour OF MDU IS
 	SIGNAL outMDU_reg : STD_LOGIC_VECTOR(31 DOWNTO 0);
 BEGIN
-	outMDU_reg <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(SIGNED(in1)) *
-				  TO_INTEGER(SIGNED(in2)), 32)) WHEN startMDU = '1' AND arithMUL = '1' ELSE
-				  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(SIGNED(in1)) /
-				  TO_INTEGER(SIGNED(in2)), 32)) WHEN startMDU = '1' AND arithDIV = '1' ELSE
+	outMDU_reg <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) *
+				  TO_INTEGER(UNSIGNED(in2)), 32)) WHEN startMDU = '1' AND arithMUL = '1' ELSE
+				  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) /
+				  TO_INTEGER(UNSIGNED(in2)), 32)) WHEN startMDU = '1' AND arithDIV = '1' ELSE
 			      (OTHERS => 'Z');
+	readyMDU <= arithMUL OR arithDIV;
 	
 	PROCESS (clk, rst)
 	BEGIN
@@ -192,9 +195,9 @@ END ENTITY CMP;
 
 ARCHITECTURE behaviour OF CMP IS
 BEGIN
-	lt <= '1' WHEN TO_INTEGER(SIGNED(in2)) < TO_INTEGER(SIGNED(in1)) ELSE '0';
-	eq <= '1' WHEN TO_INTEGER(SIGNED(in2)) = TO_INTEGER(SIGNED(in1)) ELSE '0';
-	gt <= '1' WHEN TO_INTEGER(SIGNED(in2)) > TO_INTEGER(SIGNED(in1)) ELSE '0';	
+	lt <= '1' WHEN TO_INTEGER(SIGNED(in1)) < TO_INTEGER(SIGNED(in2)) ELSE '0';
+	eq <= '1' WHEN TO_INTEGER(SIGNED(in1)) = TO_INTEGER(SIGNED(in2)) ELSE '0';
+	gt <= '1' WHEN TO_INTEGER(SIGNED(in1)) > TO_INTEGER(SIGNED(in2)) ELSE '0';	
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -214,7 +217,7 @@ END ENTITY ADD;
 ARCHITECTURE behaviour OF ADD IS
 BEGIN
 	outADD <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) +
-			  TO_INTEGER(UNSIGNED(in2)), 16));
+			  TO_INTEGER(UNSIGNED(in2)), n));
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -263,8 +266,7 @@ END ENTITY MUX2ofnbits;
 ARCHITECTURE behaviour OF MUX2ofnbits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-			  in2 WHEN sel2 = '1' ELSE 
-			  (OTHERS => 'Z');
+			  in2 WHEN sel2 = '1';
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
