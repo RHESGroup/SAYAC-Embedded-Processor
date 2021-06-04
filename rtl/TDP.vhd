@@ -3,7 +3,7 @@
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
 --	History:
---	Date:			26 April 2021
+--	Date:			9 MAY 2021
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
@@ -63,16 +63,16 @@ BEGIN
 	rs2 <= Instruction(11 DOWNTO 8);
 	rd  <= Instruction(3 DOWNTO 0);
 
-	dataBus <= (OTHERS => '0') WHEN driveDataBus = '1' ELSE p1;
+	dataBus <= (OTHERS => 'Z') WHEN driveDataBus = '0' ELSE p1;
 	
 	MEMORY : ENTITY WORK.MEM PORT MAP 
 				(clk, rst, readMEM, writeMEM, addrBus, p1, dataBus, readyMEM);
 				
-	InstructionROM : ENTITY WORK.inst_ROM GENERIC MAP (	3 )
-						PORT MAP (clk, rst, addrBus, dataBus);
+	InstructionROM : ENTITY WORK.inst_ROM GENERIC MAP (	3857 )
+						PORT MAP (clk, rst, selPC_MEM, addrBus, dataBus);
 		
 	rd1 : ENTITY WORK.ADD GENERIC MAP ( 4 )
-			PORT MAP (rd, "00001", outrd1);
+			PORT MAP (rd, "0001", outrd1);
 		
 	muxrd : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 4 )
 				PORT MAP (rd, outrd1, selrd0_TRF, selrd1_TRF, outMuxrd);
@@ -124,7 +124,8 @@ BEGIN
 			PORT MAP (outPC, X"0001", outPC1);
 	
 	ADR : ENTITY WORK.REG  PORT MAP 
-			(clk, rst, ldADR, outPCP, outADR);
+--			(clk, rst, ldADR, outPCP, outADR);
+			(clk, rst, ldADR, outMuxPCP, outADR);
 	
 	muxMEM : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 16 )
 				PORT MAP (outADR, outPC, selADR_MEM, selPC_MEM, addrBus);
@@ -132,7 +133,7 @@ BEGIN
 	
 	MultDivUnit : ENTITY WORK.MDU PORT MAP 
 					(clk, rst, startMDU, arithMUL, arithDIV, ldMDU1, ldMDU2, p1, p2,
-					outMDU1, outMDU2);
+					outMDU1, outMDU2, readyMDU);
 	
 	muxASU : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 16 )
 				PORT MAP (p2, outIMM, selp2_ASU, selimm_ASU, outMuxASU);
@@ -148,7 +149,7 @@ BEGIN
 	
 	
 	muxSHU : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 5 )
-		PORT MAP (p2(4 DOWNTO 0), Instruction(4 DOWNTO 0), selp2_SHU, 
+		PORT MAP (p2(4 DOWNTO 0), Instruction(8 DOWNTO 4), selp2_SHU, 
 				 selshim_SHU, outMuxSHU);
 	
 	SHiftUnit : ENTITY WORK.SHU PORT MAP 
