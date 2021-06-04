@@ -79,3 +79,4 @@ BEGIN
 				(clk, rst, readMEM, writeMEM, addr, 
 				writeData, readData, readyMEM);
 END ARCHITECTURE test;
+
