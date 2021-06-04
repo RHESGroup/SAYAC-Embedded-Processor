@@ -3,7 +3,7 @@
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
 --	History:
---	Date:			26 April 2021
+--	Date:			21 May 2021
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
@@ -128,40 +128,40 @@ BEGIN
 						selMDU2_TRF <= '0';	    selIMM_TRF <= '0';		selrs1_TRF <= '0';	    
 						selrd_1_TRF <= '0';		selrd0_TRF <= '0';		selrd1_TRF <= '0';	    
 						writeTRF <= '0';		selp1_PCP <= '0';		selimm_PCP <= '0';	
-						selp1_PC <= '0';		selPCadd_PC <= '0';		selPC1_PC <= '0';       
-						selPC_MEM <= '0';		selADR_MEM <= '0';	    SE5bits <= '0';			
-						SE6bits <= '0';			USE8bits <= '0';		SE8bits <= '0';			
-						p1lowbits <= '0';		selp2_ASU <= '0';		selimm_ASU <= '0';		
-						arithADD <= '0';		arithSUB <= '0';        logicAND <= '0';		
-						onesComp <= '0';		twosComp <= '0';        selp2_SHU <= '0';		
-						selshim_SHU <= '0';		logicSH <= '0';			arithSH <= '0';
-						ldMDU1 <= '0';			ldMDU2 <= '0';			arithMUL <= '0';
-						arithDIV <= '0';		startMDU <= '0';        ldIR <= '0';
-						ldADR <= '0';			ldPC <= '0';	        readMEM <= '0';
-						writeMEM <= '0';		readIO <= '0';			writeIO <= '0';		
-						selrd_2_TRF <= '0';		selrs2_TRF <= '0';		driveDataBus <= '0';
-						setFlags <= '0';		enFlag <= '0';
+						selp1_PC <= '0';		selPCadd_PC <= '0';     selPC_MEM <= '0';		
+						selADR_MEM <= '0';	    SE5bits <= '0';			SE6bits <= '0';			
+						USE8bits <= '0';		SE8bits <= '0';			p1lowbits <= '0';		
+						selp2_ASU <= '0';		selimm_ASU <= '0';		arithADD <= '0';		
+						arithSUB <= '0';        logicAND <= '0';		onesComp <= '0';		
+						twosComp <= '0';        selp2_SHU <= '0';		selshim_SHU <= '0';
+						logicSH <= '0';			arithSH <= '0';			ldMDU1 <= '0';			
+						ldMDU2 <= '0';			arithMUL <= '0';		arithDIV <= '0';		
+						startMDU <= '0';        ldIR <= '0';			ldADR <= '0';	
+						readMEM <= '0';			writeMEM <= '0';		readIO <= '0';	
+						writeIO <= '0';			selrd_2_TRF <= '0';		selrs2_TRF <= '0';		
+						driveDataBus <= '0';	setFlags <= '0';		enFlag <= '0';
 						selFlag <= (OTHERS => '0');
+						ldPC <= '1';		selPC1_PC <= '1';  			
 					WHEN RSV2 => 
 						seldataBus_TRF <= '0';	selPC1_TRF <= '0';		selLLU_TRF <= '0'; 
 						selSHU_TRF <= '0';	    selASU_TRF <= '0';		selMDU1_TRF <= '0'; 
 						selMDU2_TRF <= '0';	    selIMM_TRF <= '0';		selrs1_TRF <= '0';	    
 						selrd_1_TRF <= '0';		selrd0_TRF <= '0';		selrd1_TRF <= '0';	    
 						writeTRF <= '0';		selp1_PCP <= '0';		selimm_PCP <= '0';	
-						selp1_PC <= '0';		selPCadd_PC <= '0';		selPC1_PC <= '0';       
-						selPC_MEM <= '0';		selADR_MEM <= '0';	    SE5bits <= '0';			
-						SE6bits <= '0';			USE8bits <= '0';		SE8bits <= '0';			
-						p1lowbits <= '0';		selp2_ASU <= '0';		selimm_ASU <= '0';		
-						arithADD <= '0';		arithSUB <= '0';        logicAND <= '0';		
-						onesComp <= '0';		twosComp <= '0';        selp2_SHU <= '0';		
-						selshim_SHU <= '0';		logicSH <= '0';			arithSH <= '0';
-						ldMDU1 <= '0';			ldMDU2 <= '0';			arithMUL <= '0';
-						arithDIV <= '0';		startMDU <= '0';        ldIR <= '0';
-						ldADR <= '0';			ldPC <= '0';	        readMEM <= '0';
-						writeMEM <= '0';		readIO <= '0';			writeIO <= '0';		
-						selrd_2_TRF <= '0';		selrs2_TRF <= '0';		driveDataBus <= '0';	
-						setFlags <= '0';		enFlag <= '0';
-						selFlag <= (OTHERS => '0');	
+						selp1_PC <= '0';		selPCadd_PC <= '0';     selPC_MEM <= '0';		
+						selADR_MEM <= '0';	    SE5bits <= '0';			SE6bits <= '0';			
+						USE8bits <= '0';		SE8bits <= '0';			p1lowbits <= '0';		
+						selp2_ASU <= '0';		selimm_ASU <= '0';		arithADD <= '0';		
+						arithSUB <= '0';        logicAND <= '0';		onesComp <= '0';		
+						twosComp <= '0';        selp2_SHU <= '0';		selshim_SHU <= '0';
+						logicSH <= '0';			arithSH <= '0';			ldMDU1 <= '0';			
+						ldMDU2 <= '0';			arithMUL <= '0';		arithDIV <= '0';		
+						startMDU <= '0';        ldIR <= '0';			ldADR <= '0';	
+						readMEM <= '0';			writeMEM <= '0';		readIO <= '0';	
+						writeIO <= '0';			selrd_2_TRF <= '0';		selrs2_TRF <= '0';		
+						driveDataBus <= '0';	setFlags <= '0';		enFlag <= '0';
+						selFlag <= (OTHERS => '0');
+						ldPC <= '1';		selPC1_PC <= '1'; 	
 					WHEN INST2 =>
 						CASE (opcode3downto2) IS
 							WHEN LDR =>
@@ -226,16 +226,14 @@ BEGIN
 						arithSUB <= '1';		selrd0_TRF <= '1';		selASU_TRF <= '1';	
 						writeTRF <= '1';		selPC1_PC <= '1';		ldPC <= '1';
 					WHEN MUL =>
-						selrs1_TRF <= '1';		selrs2_TRF <= '1';		ldMDU1 <= '1';
-						arithMUL <= '1';
+						selrs1_TRF <= '1';		selrs2_TRF <= '1';		arithMUL <= '1';
 						IF readyMDU = '1' THEN 
-							startMDU <= '1';	
+							startMDU <= '1';	ldMDU1 <= '1';
 						END IF;
 					WHEN DIV =>
-						selrs1_TRF <= '1';		selrs2_TRF <= '1';		ldMDU1 <= '1';
-						arithDIV <= '1';
+						selrs1_TRF <= '1';		selrs2_TRF <= '1';		arithDIV <= '1';
 						IF readyMDU = '1' THEN 
-							startMDU <= '1';	
+							startMDU <= '1';	ldMDU1 <= '1';
 						END IF;
 					WHEN INST15 =>
 						CASE (opcode3downto1) IS
@@ -250,31 +248,99 @@ BEGIN
 							WHEN BRC =>
 								CASE (RFI) IS
 									WHEN "000" =>
+										ldPC <= '1';
 										IF outFlag(4) = '1' THEN						--eq
-											selrd_1_TRF <= '1';	selp1_PC <= '1';	ldPC <= '1';
+											selrd_1_TRF <= '1';		selp1_PC <= '1';
+										ELSE
+											selPC1_PC <= '1';		
 										END IF;
 									WHEN "001" =>
+										ldPC <= '1';
 										IF outFlag(5) = '0' THEN						--lt
-											selrd_1_TRF <= '1';	selp1_PC <= '1';	ldPC <= '1';
+											selrd_1_TRF <= '1';		selp1_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
 										END IF;
 									WHEN "010" =>
+										ldPC <= '1';
 										IF outFlag(5) = '1' THEN						--gt
-											selrd_1_TRF <= '1';	selp1_PC <= '1';	ldPC <= '1';
+											selrd_1_TRF <= '1';		selp1_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
 										END IF;
 									WHEN "011" =>
+										ldPC <= '1';
 										IF outFlag(5) = '1' OR outFlag(4) = '1' THEN	--gt/eq
-											selrd_1_TRF <= '1';	selp1_PC <= '1';	ldPC <= '1';
+											selrd_1_TRF <= '1';		selp1_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
 										END IF;
 									WHEN "100" =>
+										ldPC <= '1';
 										IF outFlag(5) = '0' OR outFlag(4) = '1' THEN	--lt/eq
-											selrd_1_TRF <= '1';	selp1_PC <= '1';	ldPC <= '1';
+											selrd_1_TRF <= '1';		selp1_PC <= '1';
+										ELSE
+											selPC1_PC <= '1';		
+										END IF;
+									WHEN "101" =>
+										ldPC <= '1';
+										IF outFlag(4) = '0' THEN						--neq
+											selrd_1_TRF <= '1';		selp1_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
 										END IF;
 									WHEN OTHERS =>
 										selrd_1_TRF <= '0';		selp1_PC <= '0';	ldPC <= '0';
+										selPC1_PC <= '0';
 								END CASE;
 							WHEN BRR =>
-								selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
-								ldPC <= '1';
+								CASE (RFI) IS
+									WHEN "000" =>
+										ldPC <= '1';
+										IF outFlag(4) = '1' THEN						--eq
+											selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
+										END IF;
+									WHEN "001" =>
+										ldPC <= '1';
+										IF outFlag(5) = '0' THEN						--lt
+											selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';											
+										END IF;
+									WHEN "010" =>
+										ldPC <= '1';
+										IF outFlag(5) = '1' THEN						--gt
+											selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';		
+										END IF;
+									WHEN "011" =>
+										ldPC <= '1';
+										IF outFlag(5) = '1' OR outFlag(4) = '1' THEN	--gt/eq
+											selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
+										END IF;
+									WHEN "100" =>
+										ldPC <= '1';
+										IF outFlag(5) = '0' OR outFlag(4) = '1' THEN	--lt/eq
+											selrd_1_TRF <= '1';		selp1_PCP <= '1';		selPCadd_PC <= '1';	
+										ELSE
+											selPC1_PC <= '1';
+										END IF;
+									WHEN "101" =>
+										ldPC <= '1';
+										IF outFlag(4) = '0' THEN						--neq
+											selrd_1_TRF <= '1';		selp1_PC <= '1';		selPCadd_PC <= '1';
+										ELSE
+											selPC1_PC <= '1';	
+										END IF;
+									WHEN OTHERS =>
+										selrd_1_TRF <= '0';		selp1_PCP <= '0';		selPCadd_PC <= '0';	
+										ldPC <= '0';
+								END CASE;
 							WHEN NTR =>
 								selrs1_TRF <= '1';		selrd0_TRF <= '1';		selLLU_TRF <= '1';	
 								writeTRF <= '1';		selPC1_PC <= '1';		ldPC <= '1';
@@ -321,7 +387,7 @@ BEGIN
 				-- SHI
 				IF opcode(7 DOWNTO 2) = SHI THEN
 					selrd_1_TRF <= '1';		selshim_SHU <= '1';		selrd0_TRF <= '1';
-					selSHU_TRF <= '1';		writeTRF <= '1';	selPC1_PC <= '1';	
+					selSHU_TRF <= '1';		writeTRF <= '1';		selPC1_PC <= '1';	
 					ldPC <= '1';
 					IF opcode(1) = '0' THEN
 						logicSH <= '1';
@@ -335,22 +401,24 @@ BEGIN
 						CASE (opcode3downto2) IS
 							WHEN LDR =>
 								selADR_MEM <= '1';	seldataBus_TRF <= '1';	selPC1_PC <= '1';	
-								ldPC <= '1';	
-								IF opcode(1) = '0' THEN		--I/O
+								IF opcode(1) = '1' THEN		--I/O
 									readIO <= '1';	writeTRF <= '1';
 								ELSE						--MEM
 									readMEM <= '1';
 									IF readyMEM = '1' THEN
-										writeTRF <= '1';
+										ldPC <= '1';	writeTRF <= '1';
 									END IF;
 								END IF;
 							WHEN STR =>
 								selADR_MEM <= '1';	selrs1_TRF <= '1';		driveDataBus <= '1';
-								selPC1_PC <= '1';	ldPC <= '1';
-								IF opcode(1) = '0' THEN
+								selPC1_PC <= '1';
+								IF opcode(1) = '1' THEN
 									writeIO <= '1';
 								ELSE
 									writeMEM <= '1';
+									IF readyMEM = '1' THEN
+										ldPC <= '1';
+									END IF;
 								END IF;
 							WHEN OTHERS => 
 								selADR_MEM <= '0';	selrd0_TRF <= '0';	readIO <= '0';	
@@ -503,7 +571,7 @@ BEGIN
 					WHEN INST2 =>
 						CASE (opcode3downto2) IS
 							WHEN LDR =>	
-								IF opcode(1) = '0' THEN		--I/O
+								IF opcode(1) = '1' THEN		--I/O
 									INST <= I_LDR_IO;	nstate <= fetch;
 									
 								ELSE						--MEM
@@ -515,7 +583,7 @@ BEGIN
 									END IF;
 								END IF;
 							WHEN STR =>
-								IF opcode(1) = '0' THEN
+								IF opcode(1) = '1' THEN
 									INST <= I_STR_IO;	nstate <= fetch; 	
 								ELSE
 									INST <= I_STR_MEM;
