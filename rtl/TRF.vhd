@@ -41,7 +41,11 @@ BEGIN
 	BEGIN
 		IF rst = '1' THEN
 			FOR I IN 0 TO 15 LOOP
-				memTRF(I) <= STD_LOGIC_VECTOR(TO_UNSIGNED(I, 16));
+				IF I /= 14 THEN
+					memTRF(I) <= STD_LOGIC_VECTOR(TO_UNSIGNED(I, 16));
+				ELSE
+					memTRF(I) <= X"FFFE";
+				END IF;
 			END LOOP;
 		ELSIF clk = '0' AND clk'EVENT  THEN
 			IF writeTRF = '1' AND rd /= "0000" THEN
