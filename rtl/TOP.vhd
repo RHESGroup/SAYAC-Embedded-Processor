@@ -3,7 +3,7 @@
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
 --	History:
---	Date:			26 April 2021
+--	Date:			27 April 2021
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
@@ -80,3 +80,19 @@ BEGIN
 					readMEM, writeMEM, readIO, writeIO,
 					setFlags, enFlag, outFlag, selFlag);
 END ARCHITECTURE behaviour;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+ENTITY test_TOP IS
+END ENTITY test_TOP;
+
+ARCHITECTURE test OF test_TOP IS
+	SIGNAL clk : STD_LOGIC := '0';
+	SIGNAL rst : STD_LOGIC;
+BEGIN	
+	clk <= NOT clk AFTER 5 NS WHEN NOW <= 5000000 NS ELSE '0';
+	rst <= '1', '0' AFTER 2 NS;
+
+	TOP_Circuit : ENTITY WORK.TOP PORT MAP 
+					(clk, rst);
+END ARCHITECTURE test;
