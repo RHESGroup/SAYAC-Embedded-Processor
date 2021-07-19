@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ISSPlusPower.h"
+#include "ISSPowerV2.h"
 #include "Memory.h"
 #include <systemc.h>
 
