@@ -71,13 +71,13 @@ BEGIN
 			PORT MAP (rd, outrd1);
 		
 	muxrd : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 4 )
-				PORT MAP (rd, outrd1, selrd0_TRF, selrd1_TRF, outMuxrd);
+			PORT MAP (rd, outrd1, selrd0_TRF, selrd1_TRF, outMuxrd);
 		
 	muxrs1 : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 4 )
-				PORT MAP (rs1, rd, selrs1_TRF, selrd_1_TRF, outMuxrs1);
+			PORT MAP (rs1, rd, selrs1_TRF, selrd_1_TRF, outMuxrs1);
 				  
 	muxrs2 : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 4 )
-				PORT MAP (rs2, rd, selrs2_TRF, selrd_2_TRF, outMuxrs2);
+			PORT MAP (rs2, rd, selrs2_TRF, selrd_2_TRF, outMuxrs2);
 		
 	muxinDataTRF : ENTITY WORK.MUX8of16bits PORT MAP 
 				(outIMM, outMDU1, outMDU2, outASU, outLLU, outSHU, 
@@ -128,7 +128,7 @@ BEGIN
 	
 	MultDivUnit : ENTITY WORK.MDU PORT MAP 
 --				(clk, rst, startMDU, arithMUL, arithDIV, signMDU, ldMDU1, ldMDU2, 
-				(clk, rst, startMDU, arithMUL, arithDIV, '1', ldMDU1, ldMDU2, 
+				(clk, rst, startMDU, arithMUL, arithDIV, '0', ldMDU1, ldMDU2, 
 				p1, p2,	outMDU1, outMDU2, readyMDU);
 	
 	muxASU : ENTITY WORK.MUX2ofnbits GENERIC MAP ( 16 )
