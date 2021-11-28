@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		SAYAC_MEM.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		SAYAC_MEM.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.900
---	History:
---	Date:			20 April 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		20 April 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -57,7 +57,7 @@ BEGIN
 
 --    readData <= memory(TO_INTEGER(UNSIGNED(addr))) WHEN readMEM = '1' ELSE
     rwData <= memory(TO_INTEGER(UNSIGNED(addr))) WHEN readMEM = '1' ELSE
-			    (OTHERS => 'Z'); 
+	      (OTHERS => 'Z'); 
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -81,7 +81,7 @@ BEGIN
 	rwData <= X"000A", X"00A0" AFTER 14 NS;
 	
 	MEMORY : ENTITY WORK.MEM PORT MAP 
-				(clk, rst, readMEM, writeMEM, addr, 
-				rwData, readyMEM);
---				writeData, readData, readyMEM);
+			(clk, rst, readMEM, writeMEM, addr, 
+			rwData, readyMEM);
+--			writeData, readData, readyMEM);
 END ARCHITECTURE test;
