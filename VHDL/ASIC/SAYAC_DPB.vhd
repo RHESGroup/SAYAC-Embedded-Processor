@@ -16,7 +16,24 @@
 --	File content description:
 --	DataPath Blocks (DPB) of the SAYAC core                                 
 --******************************************************************************
+--******************************************************************************
+--	Filename:		SAYAC_DPB.vhd
+--	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Version:		0.990
+--	History:
+--	Date:			28 November 2021
+--	Last Author: 	HANIEH
+--  Copyright (C) 2021 University of Tehran
+--  This source file may be used and distributed without
+--  restriction provided that this copyright statement is not
+--  removed from the file and that any derivative work contains
+--  the original copyright notice and the associated disclaimer.
+--
 
+--******************************************************************************
+--	File content description:
+--	DataPath Blocks (DPB) of the SAYAC core                                 
+--******************************************************************************
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
@@ -185,23 +202,41 @@ END ENTITY MDU;
 ARCHITECTURE behaviour OF MDU IS
 	SIGNAL outMDU_reg, outMULT, outDIV : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL opr1, opr2 : STD_LOGIC_VECTOR(16 DOWNTO 0);
+	SIGNAL inp1, inp2 : STD_LOGIC_VECTOR(16 DOWNTO 0);
+	SIGNAL twosCompin1, twosCompin2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
+	SIGNAL Q, R, twosCompQ, twosCompR : STD_LOGIC_VECTOR(15 DOWNTO 0);
 	SIGNAL doneMULT, doneDIV : STD_LOGIC;
 	SIGNAL startMULT, startDIV : STD_LOGIC;
 BEGIN
 	opr1 <= (in1(15) & in1) WHEN signMDU = '1' ELSE ('0' & in1);
 	opr2 <= (in2(15) & in2) WHEN signMDU = '1' ELSE ('0' & in2);
+	
+	COMPin1 : ENTITY WORK.COMP PORT MAP 
+			(in1, '1', twosCompin1);
+	COMPin2 : ENTITY WORK.COMP PORT MAP 
+			(in2, '1', twosCompin2);
+	inp1 <= (twosCompin1(15) & twosCompin1) WHEN (in1(15) AND signMDU) = '1' ELSE ('0' & in1);
+	inp2 <= (twosCompin2(15) & twosCompin2) WHEN (in2(15) AND signMDU) = '1' ELSE ('0' & in2);
+	
 	startMULT <= arithMUL AND startMDU;
 	startDIV  <= arithDIV AND startMDU;
 	
---	MULT : ENTITY WORK.Radix4_MUL
-	MULT : ENTITY WORK.Radix16_MUL
+	MULT : ENTITY WORK.Radix4_MUL
+--	MULT : ENTITY WORK.Radix16_MUL
 		PORT MAP (clk, rst, startMULT, '0', opr1, opr2, doneMULT, outMULT);
 	
 	DIVU : ENTITY WORK.Radix2_DIV 
-		PORT MAP (clk, rst, startDIV, opr1, opr2, doneDIV, outDIV);
+		PORT MAP (clk, rst, startDIV, inp1, inp2, doneDIV, outDIV);
+	
+	COMPQ : ENTITY WORK.COMP PORT MAP 
+			(outDIV(15 DOWNTO 0), '1', twosCompQ);
+	COMPR : ENTITY WORK.COMP PORT MAP 
+			(outDIV(31 DOWNTO 16), '1', twosCompR);
+	Q <= twosCompQ WHEN ((in1(15) XOR in2(15)) AND signMDU) = '1' ELSE outDIV(15 DOWNTO 0);
+	R <= twosCompR WHEN (in1(15) AND signMDU) = '1' ELSE outDIV(31 DOWNTO 16);
 	
 	outMDU_reg <= outMULT WHEN arithMUL = '1' ELSE
-		      outDIV WHEN arithDIV = '1';
+		      (R & Q) WHEN arithDIV = '1';
 	
 	readyMDU <= (arithMUL AND doneMULT) OR (arithDIV AND doneDIV);
 	
