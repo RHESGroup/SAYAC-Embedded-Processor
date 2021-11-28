@@ -16,7 +16,6 @@
 --	File content description:
 --	Radix2 divider unit of the SAYAC core                                 
 --******************************************************************************
---
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
@@ -72,9 +71,9 @@ ARCHITECTURE behaviour OF Datapath_Radix2_DIV IS
 	SIGNAL serOutQ, serOutR : STD_LOGIC;
 BEGIN	
 	shReg_R: ENTITY WORK.SHR PORT MAP
-				(clk, rst, serOutQ, shift_R, clr_R, load_R, mux1Out, Rprev, serOutR);
+			(clk, rst, serOutQ, shift_R, clr_R, load_R, mux1Out, Rprev, serOutR);
 	shReg_Q: ENTITY WORK.SHR PORT MAP
-				(clk, rst, '0', shift_Q, '0', load_Q, mux2Out, Qprev, serOutQ);
+			(clk, rst, '0', shift_Q, '0', load_Q, mux2Out, Qprev, serOutQ);
 	
 	PROCESS (clk, rst)
 	BEGIN
@@ -111,7 +110,7 @@ ENTITY Controller_Radix2_DIV IS
 END ENTITY Controller_Radix2_DIV;
 
 ARCHITECTURE behaviour OF Controller_Radix2_DIV IS
-	TYPE state IS (IDLE, LOAD, SHIFT, SUB);
+	TYPE state IS (LOAD, SHIFT, SUB);
 	SIGNAL ps, ns : state;
 	SIGNAL co, incCnt, iniCnt : STD_LOGIC;
 	SIGNAL cnt, cntinc : STD_LOGIC_VECTOR (4 DOWNTO 0);
@@ -123,7 +122,7 @@ BEGIN
 			cnt <= (OTHERS => '0');
 		ELSIF clk = '1' AND clk'EVENT THEN
 			IF iniCnt = '1' THEN
-				cnt <= "01111";
+				cnt <= "01110";
 			ELSIF incCnt = '1' THEN
 				cnt <= cntinc;
 			END IF;
@@ -135,7 +134,7 @@ BEGIN
 	PROCESS (clk, rst)
 	BEGIN
 		IF rst = '1' THEN
-			ps <= IDLE;
+			ps <= LOAD;
 		ELSIF clk = '1' AND clk'EVENT THEN
 			ps <= ns;
 		END IF;
@@ -144,19 +143,17 @@ BEGIN
 	PROCESS (ps, start, co)
 	BEGIN
 		CASE (ps) IS
-			WHEN IDLE => 
-				IF start = '1' THEN
-					ns <= LOAD;
-				ELSE
-					ns <= IDLE;
-				END IF;
 			WHEN LOAD => 
-				ns <= SHIFT;
+				IF start = '1' THEN
+					ns <= SHIFT;
+				ELSE
+					ns <= LOAD;
+				END IF;
 			WHEN SHIFT => 
 				ns <= SUB;
 			WHEN SUB => 
 				IF co = '1' THEN
-					ns <= IDLE;
+					ns <= LOAD;
 				ELSE
 					ns <= SHIFT;
 				END IF;
@@ -170,20 +167,19 @@ BEGIN
 		clr_R <= '0';	readyDIV <= '0';	incCnt <= '0';	iniCnt <= '0';
 		
 		CASE (ps) IS
-			WHEN IDLE => 
 			WHEN LOAD => 
 				load_Q <= '1';	load_M <= '1';	iniCnt <= '1';	clr_R <= '1';
 			WHEN SHIFT => 
 				shift_R <= '1';	shift_Q <= '1';
+				IF co = '1' THEN
+					readyDIV <= '1';
+				END IF;
 			WHEN SUB => 
 				setQ0 <= '1';	load_R <= '1';	load_Q <= '1';	incCnt <= '1';
 				IF sign = '0' THEN
 					setR <= '1';	Q0 <= '1';
 				ELSE
 					setR <= '0';	Q0 <= '0';
-				END IF;
-				IF co = '1' THEN
-					readyDIV <= '1';
 				END IF;
 		END CASE;
 	END PROCESS;
