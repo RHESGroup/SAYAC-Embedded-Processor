@@ -1,20 +1,20 @@
 --******************************************************************************
---	Filename:		SAYAC_controller.vhd
+--	Filename:		CLA.vhd
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.990
+--  	Version:		0.990
 --	History:
 --	Date:			21 May 2021
 --	Last Author: 	HANIEH
---  Copyright (C) 2021 University of Teheran
---  This source file may be used and distributed without
---  restriction provided that this copyright statement is not
---  removed from the file and that any derivative work contains
---  the original copyright notice and the associated disclaimer.
+--  	Copyright (C) 2021 University of Teheran
+--  	This source file may be used and distributed without
+--  	restriction provided that this copyright statement is not
+-- 	removed from the file and that any derivative work contains
+--  	the original copyright notice and the associated disclaimer.
 --
 
 --******************************************************************************
 --	File content description:
---	Carry Look Ahead (CLA) of the SAYAC core                                 
+--	Carry Look Ahead adder (CLA) of the SAYAC core                                 
 --******************************************************************************
 
 LIBRARY IEEE;
