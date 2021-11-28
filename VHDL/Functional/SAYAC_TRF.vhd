@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		SAYAC_TRF.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		SAYAC_TRF.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
---	History:
---	Date:			28 May 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		28 May 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -58,9 +58,9 @@ BEGIN
 	
 	-- Flags = R15(7 DOWNTO 0)
 	FlagsFF : FOR I IN 0 TO 7 GENERATE
-				FF_bitI : ENTITY WORK.IFF
+			FF_bitI : ENTITY WORK.IFF
 					PORT MAP (clk, rst, enFlag, setFlags, 
-							 selFlag(I), inFlag(I), outFlag_reg(I));
+						  selFlag(I), inFlag(I), outFlag_reg(I));
 	END GENERATE;
 	
 	outFlag <= outFlag_reg;
@@ -125,6 +125,6 @@ BEGIN
 	write_data <= X"000A", X"00A0" AFTER 14 NS;
 	
 	TheRegisterFile : ENTITY WORK.TRF PORT MAP 
-						(clk, rst, writeTRF, setFlags, enFlag, rs1, rs2, rd,
-						selFlag, inFlag, outFlag, write_data, p1, p2);
+				(clk, rst, writeTRF, setFlags, enFlag, rs1, rs2, rd,
+				selFlag, inFlag, outFlag, write_data, p1, p2);
 END ARCHITECTURE test;
