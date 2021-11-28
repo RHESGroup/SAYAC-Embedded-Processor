@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		SAYAC_DPB.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		SAYAC_DPB.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
---	History:
---	Date:			18 June 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		18 June 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -32,11 +32,11 @@ END ENTITY IMM;
 ARCHITECTURE behaviour OF IMM IS
 BEGIN
 	outIMM <= (15 DOWNTO 5 => in1(4)) & in1(4 DOWNTO 0) WHEN SE5bits = '1' ELSE
-			  (15 DOWNTO 6 => in1(5)) & in1(5 DOWNTO 0) WHEN SE6bits = '1' ELSE
-			  (15 DOWNTO 8 => '0') & in1 WHEN USE8bits = '1' ELSE
-			  (15 DOWNTO 8 => in1(7)) & in1 WHEN SE8bits = '1' ELSE
-			  in1 & in2 WHEN p1lowbits = '1' ELSE 
-			  (OTHERS => '0');
+		  (15 DOWNTO 6 => in1(5)) & in1(5 DOWNTO 0) WHEN SE6bits = '1' ELSE
+	          (15 DOWNTO 8 => '0') & in1 WHEN USE8bits = '1' ELSE
+	          (15 DOWNTO 8 => in1(7)) & in1 WHEN SE8bits = '1' ELSE
+	    	  in1 & in2 WHEN p1lowbits = '1' ELSE 
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -56,17 +56,14 @@ ARCHITECTURE behaviour OF LLU IS
 	SIGNAL outCOMP : STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
 	onebartwo <= '0' WHEN onesComp = '1' ELSE
-				 '1' WHEN twosComp = '1' ELSE '0';
+		     '1' WHEN twosComp = '1' ELSE '0';
 				 
 	COMPlementer : ENTITY WORK.COMP PORT MAP 
-					(in1, onebartwo, outCOMP);
+				(in1, onebartwo, outCOMP);
 	
 	outLLU <= (in1 AND in2) WHEN logicAND = '1' ELSE
-			  outCOMP WHEN onesComp = '1' OR twosComp = '1' ELSE
---			  (NOT in1) WHEN onesComp = '1' ELSE
---			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(NOT in1)) + 1, 16))
---			  WHEN twosComp = '1' ELSE
-			  (OTHERS => '0');
+		  outCOMP WHEN onesComp = '1' OR twosComp = '1' ELSE
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -82,23 +79,12 @@ ENTITY ASU IS
 END ENTITY ASU;
 
 ARCHITECTURE behaviour OF ASU IS
-	-- SIGNAL cin : STD_LOGIC;
-	-- SIGNAL input2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
-BEGIN
-	-- cin <= '0' WHEN arithADD = '1' ELSE
-		   -- '1' WHEN arithSUB = '1' ELSE '0';
-	-- input2 <= in2 WHEN arithADD = '1' ELSE
-			  -- (NOT in2) WHEN arithSUB = '1' ELSE 
-			  -- (OTHERS => '0');
-	
-	-- ADD1 : ENTITY WORK.CLA PORT MAP 
-			-- (in1, input2, cin, outASU);
-	
+BEGIN	
 	outASU <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) + 
-			  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithADD = '1' ELSE
-			  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) - 
-			  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithSUB = '1' ELSE 
-			  (OTHERS => '0');
+		  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithADD = '1' ELSE
+		  STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) - 
+		  TO_INTEGER(UNSIGNED(in2)), 16)) WHEN arithSUB = '1' ELSE 
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -170,24 +156,13 @@ ARCHITECTURE behaviour OF MDU IS
 	SIGNAL outMDU_reg, outMULT : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL busyMULT : STD_LOGIC;
 BEGIN
-	-- MUT : ENTITY WORK.Radix4 
-		-- PORT MAP (clk, rst, startMDU, '0', in1, in2, busyMULT, outMULT);
-	
-	-- outMDU_reg <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) *
-				  -- TO_INTEGER(UNSIGNED(in2)), 32)) WHEN startMDU = '1' AND arithMUL = '1' ELSE
-				  -- STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) /
-				  -- TO_INTEGER(UNSIGNED(in2)), 32)) WHEN startMDU = '1' AND arithDIV = '1';
-	
-	-- outMDU_reg <= outMULT WHEN arithMUL = '1' ELSE
 	outMDU_reg <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) *
-				  TO_INTEGER(UNSIGNED(in2)), 32)) WHEN arithMUL = '1' ELSE
-				  (STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) REM
-			TO_INTEGER(UNSIGNED(in2)), 16)) & STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) /
-			TO_INTEGER(UNSIGNED(in2)), 16))) WHEN startMDU = '1' AND arithDIV = '1' ELSE 
-			(OTHERS => '0');
-	
---	readyMDU <= NOT busyMULT;
-	-- readyMDU <= (arithMUL AND (NOT busyMULT)) OR arithDIV;
+		      TO_INTEGER(UNSIGNED(in2)), 32)) WHEN arithMUL = '1' ELSE
+		      (STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) REM
+		      TO_INTEGER(UNSIGNED(in2)), 16)) & STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) /
+		      TO_INTEGER(UNSIGNED(in2)), 16))) WHEN startMDU = '1' AND arithDIV = '1' ELSE 
+		      (OTHERS => '0');
+		
 	readyMDU <= arithMUL OR arithDIV;
 	
 	PROCESS (clk, rst)
@@ -258,10 +233,7 @@ END ENTITY ADD;
 ARCHITECTURE behaviour OF ADD IS
 BEGIN
 	outADD <= STD_LOGIC_VECTOR(TO_UNSIGNED(TO_INTEGER(UNSIGNED(in1)) +
-			  TO_INTEGER(UNSIGNED(in2)), n));
-			  
-	-- ADD1 : ENTITY WORK.CLA PORT MAP 
-			-- (in1, in2, '0', outADD);
+	          TO_INTEGER(UNSIGNED(in2)), n));
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -282,8 +254,8 @@ END ENTITY MUX2ofnbits;
 ARCHITECTURE behaviour OF MUX2ofnbits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-			  in2 WHEN sel2 = '1' ELSE 
-			  (OTHERS => '0');
+	          in2 WHEN sel2 = '1' ELSE 
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -302,14 +274,14 @@ END ENTITY MUX8of16bits;
 ARCHITECTURE behaviour OF MUX8of16bits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-			  in2 WHEN sel2 = '1' ELSE 
-			  in3 WHEN sel3 = '1' ELSE 
-			  in4 WHEN sel4 = '1' ELSE 
-			  in5 WHEN sel5 = '1' ELSE 
-			  in6 WHEN sel6 = '1' ELSE 
-			  in7 WHEN sel7 = '1' ELSE 
-			  in8 WHEN sel8 = '1' ELSE 
-			  (OTHERS => '0');
+		  in2 WHEN sel2 = '1' ELSE 
+		  in3 WHEN sel3 = '1' ELSE 
+		  in4 WHEN sel4 = '1' ELSE 
+		  in5 WHEN sel5 = '1' ELSE 
+		  in6 WHEN sel6 = '1' ELSE 
+		  in7 WHEN sel7 = '1' ELSE 
+		  in8 WHEN sel8 = '1' ELSE 
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -327,9 +299,9 @@ END ENTITY MUX3of16bits;
 ARCHITECTURE behaviour OF MUX3of16bits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-			  in2 WHEN sel2 = '1' ELSE 
-			  in3 WHEN sel3 = '1' ELSE 
-			  (OTHERS => '0');
+		  in2 WHEN sel2 = '1' ELSE 
+		  in3 WHEN sel3 = '1' ELSE 
+		  (OTHERS => '0');
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -448,7 +420,7 @@ BEGIN
 	in2 <= X"2042", X"0A35" AFTER 3 NS, X"F275" AFTER 4 NS;
 	
 	LogicLogicUnit : ENTITY WORK.LLU PORT MAP 
-						(in1, in2, logicAND, onesComp, twosComp, outLLU);
+				(in1, in2, logicAND, onesComp, twosComp, outLLU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -466,7 +438,7 @@ BEGIN
 	in2 <= X"2042", X"0A35" AFTER 3 NS, X"F275" AFTER 4 NS;
 	
 	AddSubUnit : ENTITY WORK.ASU PORT MAP 
-					(in1, in2, arithADD, arithSUB, outASU);
+			(in1, in2, arithADD, arithSUB, outASU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -485,7 +457,7 @@ BEGIN
 	in2 <= "00100", "10110" AFTER 3 NS, "10111" AFTER 6 NS;
 	
 	SHiftUnit : ENTITY WORK.SHU PORT MAP 
-					(in1, in2, logicSH, arithSH, outSHU);
+			(in1, in2, logicSH, arithSH, outSHU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -509,8 +481,8 @@ BEGIN
 	in2 <= X"0001", X"0005" AFTER 3 NS, X"FFFE" AFTER 106 NS;
 	
 	MultDivUnit : ENTITY WORK.MDU PORT MAP 
-					(clk, rst, startMDU, arithMUL, arithDIV, ldMDU1, 
-					ldMDU2, in1, in2, outMDU1, outMDU2, readyMDU);
+			(clk, rst, startMDU, arithMUL, arithDIV, ldMDU1, 
+			ldMDU2, in1, in2, outMDU1, outMDU2, readyMDU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -525,7 +497,7 @@ BEGIN
 	in2 <= X"0000", X"0042" AFTER 3 NS, X"FFE2" AFTER 6 NS;
 	
 	ComparatorUnit : ENTITY WORK.CMP PORT MAP 
-						(in1, in2, eq, gt);
+				(in1, in2, eq, gt);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -538,8 +510,7 @@ ARCHITECTURE test OF test_INC IS
 BEGIN
 	inINC <= X"2E18", X"8AB1" AFTER 4 NS, X"2AB1" AFTER 7 NS;
 	
-	INCrementer : ENTITY WORK.INC PORT MAP 
-					(inINC, outINC);
+	INCrementer : ENTITY WORK.INC PORT MAP (inINC, outINC);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -555,5 +526,5 @@ BEGIN
 	onebartwo <= '0', '1' AFTER 3 NS, '0' AFTER 5 NS;
 	
 	COMPlementer : ENTITY WORK.COMP PORT MAP 
-					(inCOMP, onebartwo, outCOMP);
+			(inCOMP, onebartwo, outCOMP);
 END ARCHITECTURE test;
