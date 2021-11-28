@@ -400,8 +400,8 @@ BEGIN
 	in2 <= X"F7", X"1C" AFTER 7 NS, X"6B" AFTER 10 NS;
 	
 	ImmediateUnit : ENTITY WORK.IMM PORT MAP 
-						(in1, in2, SE5bits, SE6bits, USE8bits, 
-						SE8bits, p1lowbits, outIMM);
+				(in1, in2, SE5bits, SE6bits, USE8bits, 
+				SE8bits, p1lowbits, outIMM);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
