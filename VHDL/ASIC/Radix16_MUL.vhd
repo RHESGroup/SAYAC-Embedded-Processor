@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		Radix16_MUL.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		Radix16_MUL.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
---	History:
---	Date:			21 May 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		28 November 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -16,63 +16,47 @@
 --	File content description:
 --	Radix16 multiplier unit of the SAYAC core                                 
 --******************************************************************************
+--
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
-ENTITY Radix16 IS 
+ENTITY Radix16_MUL IS 
 	PORT ( clk, rst, start, cout : IN STD_LOGIC ;
-		A, B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
 		done : OUT STD_LOGIC;
 		result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );
-END Radix16;	 
+END Radix16_MUL;	 
 
-ARCHITECTURE behavioral_Radix16 OF Radix16 IS 
-	COMPONENT Controller16 IS 
-		PORT ( clk, rst, start : IN STD_LOGIC;
-			op : IN STD_LOGIC_VECTOR (4 DOWNTO 0);	
-			ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : OUT STD_LOGIC;
-			sel_MUX : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
-			busy : OUT STD_LOGIC ); 
-	END COMPONENT;
-
-	COMPONENT Datapath16 IS 
-		PORT ( clk, rst, cout : IN STD_LOGIC;
-			A, B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-			ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : IN STD_LOGIC;
-			sel_MUX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-			op : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
-			result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );			
-	END COMPONENT;
-	
+ARCHITECTURE behavioral_Radix16_MUL OF Radix16_MUL IS 
 	SIGNAL ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, busy_reg : STD_LOGIC;
 	SIGNAL sel_MUX : STD_LOGIC_VECTOR (3 DOWNTO 0);
 	SIGNAL op : STD_LOGIC_VECTOR (4 DOWNTO 0); 
 	SIGNAL mult_out : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0'); 
 BEGIN
-	DP : Datapath16
+	DP : ENTITY WORK.Datapath_Radix16_MUL
 		PORT MAP (clk, rst, cout, A, B, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, sel_MUX, op, mult_out);
 	
-	CU : Controller16
+	CU : ENTITY WORK.Controller_Radix16_MUL
 		PORT MAP (clk, rst, start, op, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, sel_MUX, busy_reg);
 		
 	result <= mult_out WHEN busy_reg = '0';
 	done <= NOT busy_reg;
-END behavioral_Radix16;
+END behavioral_Radix16_MUL;
 ---------------------------------------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
 
-ENTITY Controller16 IS 
+ENTITY Controller_Radix16_MUL IS 
 	PORT ( clk, rst, start : IN STD_LOGIC;
 		op : IN STD_LOGIC_VECTOR (4 DOWNTO 0);	
 		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : OUT STD_LOGIC;
 		sel_MUX : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
 		busy : OUT STD_LOGIC );
-END Controller16;
+END Controller_Radix16_MUL;
 
-ARCHITECTURE behavioral_CU OF Controller16 IS 	
+ARCHITECTURE behavioral_CU OF Controller_Radix16_MUL IS 	
 	TYPE state IS (IDLE, COUNT, ADD);
 	SIGNAL p_state, n_state : state;
 	SIGNAL zero_cntr, en_cntr, co : STD_LOGIC;
@@ -153,11 +137,11 @@ BEGIN
 					sel_MUX <= "0111";	
 					sel_AS <= '0';
 				END IF;
-				IF op = "01111" THEN						-- P+8B
+				IF op = "01111" THEN				-- P+8B
 					sel_MUX <= "1000";	
 					sel_AS <= '0';
 				END IF;
-				IF op = "10000" THEN						-- P-8B
+				IF op = "10000" THEN				-- P-8B
 					sel_MUX <= "1000";	
 					sel_AS <= '1';
 				END IF;
@@ -222,45 +206,45 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
 
-ENTITY Datapath16 IS 
+ENTITY Datapath_Radix16_MUL IS 
 	PORT ( clk, rst, cout : IN STD_LOGIC;
-		A, B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
 		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : IN STD_LOGIC;
 		sel_MUX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 		op : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
 		result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );			
-END Datapath16;
+END Datapath_Radix16_MUL;
 
-ARCHITECTURE behavioral_DP OF Datapath16 IS 	
-	SIGNAL A_reg : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL B_reg, P_reg : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL AS_out, in2_AS, in2_AS_bar, incin2 : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL B2, B3, B4, B5, B6, B7, B8 : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL in2_AS_sel : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
+ARCHITECTURE behavioral_DP OF Datapath_Radix16_MUL IS 	
+	SIGNAL A_reg : STD_LOGIC_VECTOR (17 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL B_reg, P_reg : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL AS_out, in2_AS, in2_AS_bar, incin2 : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL B2, B3, B4, B5, B6, B7, B8 : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL in2_AS_sel : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL A_reg_32 : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL cin, cin1, co1, co2, co3, co4, co5 : STD_LOGIC;
+	SIGNAL cin, cin1 : STD_LOGIC;
 BEGIN	
 --A register:
 	PROCESS (clk, rst)
 	BEGIN
 		IF rst = '1' THEN
 			A_reg <= (OTHERS=>'0');
-		ELSIF rising_edge(clk)THEN
+		ELSIF clk = '1' AND clk'EVENT THEN
 			IF ld_A = '1' THEN
 				A_reg <= A & '0';
 			ELSIF sh_A = '1' THEN
-				A_reg <= AS_out(3 DOWNTO 0) & A_reg(16 DOWNTO 4);	
+				A_reg <= AS_out(3 DOWNTO 0) & A_reg(17 DOWNTO 4);	
 			END IF;
 		END IF;
 	END PROCESS;
-	A_reg_32 <= ("0000000000000000" & A_reg(16 DOWNTO 1));
+	A_reg_32 <= ("000000000000000" & A_reg(17 DOWNTO 1));
 	
 --B register: 
 	PROCESS (clk, rst)
 	BEGIN
 		IF rst = '1' THEN
 				B_reg <= (OTHERS=>'0');
-		ELSIF rising_edge(clk) THEN
+		ELSIF clk = '1' AND clk'EVENT THEN
 			IF ld_B = '1' THEN
 				B_reg <= B;
 			END IF;
@@ -272,25 +256,25 @@ BEGIN
 	BEGIN
 		IF rst = '1' THEN
 				P_reg <= (OTHERS=>'0');
-		ELSIF rising_edge(clk) THEN
+		ELSIF clk = '1' AND clk'EVENT THEN
 			IF zero_P = '1' THEN
 				P_reg <= (OTHERS=>'0');
 			ELSIF ld_P = '1' THEN
-				P_reg <= AS_out(15) & AS_out(15) & AS_out(15) & AS_out(15) & AS_out(15 DOWNTO 4);	
+				P_reg <= AS_out(16) & AS_out(16) & AS_out(16) & AS_out(16) & AS_out(16 DOWNTO 4);	
 			END IF;
 		END IF;
 	END PROCESS;	
-	B2 <= B_reg(14 DOWNTO 0) & '0';
-	B4 <= B_reg(13 DOWNTO 0) & "00";
-	B8 <= B_reg(12 DOWNTO 0) & "000";
-	ADD_B3 : ENTITY WORK.CLA GENERIC MAP (16, 16)
-		PORT MAP(B_reg, B2, '0', B3, co2);
-	ADD_B5 : ENTITY WORK.CLA GENERIC MAP (16, 16)
-		PORT MAP(B_reg, B4, '0', B5, co3);
-	ADD_B6 : ENTITY WORK.CLA GENERIC MAP (16, 16)
-		PORT MAP(B2, B4, '0', B6, co4);
-	ADD_B7 : ENTITY WORK.CLA GENERIC MAP (16, 16)
-		PORT MAP(B3, B4, '0', B7, co5);
+	B2 <= B_reg(15 DOWNTO 0) & '0';
+	B4 <= B_reg(14 DOWNTO 0) & "00";
+	B8 <= B_reg(13 DOWNTO 0) & "000";
+	ADD_B3 : ENTITY WORK.CLA17
+		PORT MAP(B_reg, B2, '0', B3);
+	ADD_B5 : ENTITY WORK.CLA17
+		PORT MAP(B_reg, B4, '0', B5);
+	ADD_B6 : ENTITY WORK.CLA17
+		PORT MAP(B2, B4, '0', B6);
+	ADD_B7 : ENTITY WORK.CLA17
+		PORT MAP(B3, B4, '0', B7);
 		
 --MUX for in1_mul	
 	PROCESS (sel_MUX, B_reg, B2, B3, B4, B5, B6, B7, B8)
@@ -315,87 +299,71 @@ BEGIN
 			in2_AS <= B8;
 		ELSIF sel_MUX = "1001" THEN
 			in2_AS <= (OTHERS => '0');
-		--	in2_AS <= in2_AS;	
 		END IF;
 	END PROCESS;
 	
 --AddSub	
 	in2_AS_bar <= NOT in2_AS;
-	INCrementer : ENTITY WORK.INC GENERIC MAP (16) PORT MAP (in2_AS_bar, incin2);
+	INCrementer : ENTITY WORK.INC GENERIC MAP (17) PORT MAP (in2_AS_bar, incin2);
 	in2_AS_sel <= in2_AS WHEN sel_AS = '0' ELSE incin2;
 	cin1 <= cin  WHEN sel_AS = '0' ELSE '0';
-	ADD1 : ENTITY WORK.CLA GENERIC MAP (16, 16)
-		PORT MAP(P_reg, in2_AS_sel, cin1, AS_out, co1);
+	ADD1 : ENTITY WORK.CLA17
+		PORT MAP(P_reg, in2_AS_sel, cin1, AS_out);
 	
 -- Tri_state for carry
 	cin <= cout WHEN sel_carry = '1' ELSE '0';
 	
 	op <= A_reg(4 DOWNTO 0);
-	result <= AS_out & A_reg_32(15 DOWNTO 0);	
+	result <= AS_out(15 DOWNTO 0) & A_reg_32(16 DOWNTO 1);	
 END behavioral_DP;		 
 ---------------------------------------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
 
-ENTITY Radix16_TB IS 
-END Radix16_TB;
+ENTITY Radix16_MUL_TB IS 
+END Radix16_MUL_TB;
 
-ARCHITECTURE behavioral_TB OF Radix16_TB IS
-	COMPONENT Radix16 IS 
-		PORT ( clk, rst, start, cout : IN STD_LOGIC;
-			A, B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
-			done : OUT STD_LOGIC;
-			result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );
-	END COMPONENT;
-
+ARCHITECTURE behavioral_TB OF Radix16_MUL_TB IS
 	SIGNAL clk : STD_LOGIC := '1';
 	SIGNAL rst, done, start, cout : STD_LOGIC;
---	SIGNAL error : STD_LOGIC;
-	SIGNAL A, B : STD_LOGIC_VECTOR (15 DOWNTO 0);
-	SIGNAL result_radix16 : STD_LOGIC_VECTOR (31 DOWNTO 0);
---	SIGNAL result_mult : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL A, B : STD_LOGIC_VECTOR (16 DOWNTO 0);
+	SIGNAL result_Radix16_MUL : STD_LOGIC_VECTOR (31 DOWNTO 0);
 BEGIN
-	MUT : Radix16 
-		PORT MAP (clk, rst, start, cout, A, B, done, result_radix16);
-	
---	result_mult <= STD_LOGIC_VECTOR(SIGNED(A) * SIGNED(B)) AFTER 100 NS;
---	error <= '1' WHEN (result_mult /= result_radix4) ELSE '0';
+	MUT : ENTITY WORK.Radix16_MUL 
+		PORT MAP (clk, rst, start, cout, A, B, done, result_Radix16_MUL);
 	
 	clk <= NOT clk AFTER 2.5 NS WHEN NOW <= 300 NS ELSE '0';
 	
 	PROCESS
 	BEGIN
-		rst <= '0', '1' AFTER 1 NS, '0' AFTER 6 NS;
+		rst <= '1', '0' AFTER 6 NS;
 		start <= '0';
 		cout <= '0';
-		WAIT FOR 2 NS;
 		
-		A <= X"0000"; 					-- A = 0
-		B <= X"0000";					-- B = 0
+		A <= "00000000000000000"; 		-- A = 0
+		B <= "00000000000000000";		-- B = 0
 		start <= '1';
-	--	WAIT FOR 100 NS;
 		WAIT UNTIL rising_edge(done);
 		
-		A <= X"0160"; 					-- A = 352
-		B <= X"0101";					-- B = 257
+		A <= "00000000101100000"; 		-- A = 352
+		B <= "00000000100000001";		-- B = 257
 		WAIT UNTIL rising_edge(done);
 		
-		A <= "0000000000001010"; 		-- A = 10
-		B <= "1111111111111011";		-- B = -5
+		A <= "00000000000001010"; 		-- A = 10
+		B <= "11111111111111011";		-- B = -5
 		WAIT UNTIL rising_edge(done);
-		start <= '0';
-		
-		A <= X"0A50"; 					-- A = 2640
-		B <= X"0080";					-- B = 128
-		WAIT UNTIL rising_edge(done);
-		
-		A <= "1111111111110111"; 		-- A = -9
-		B <= "0000000000010001";		-- B = 17
+	
+		A <= "00000101001010000"; 		-- A = 2640
+		B <= "00000000010000000";		-- B = 128
 		WAIT UNTIL rising_edge(done);
 		
-		A <= X"FFF3"; 					-- A = -13
-		B <= X"FFF6";					-- B = -10
+		A <= "11111111111110111"; 		-- A = -9
+		B <= "00000000000010001";		-- B = 17
+		WAIT UNTIL rising_edge(done);
+		
+		A <= "11111111111110011"; 		-- A = -13
+		B <= "11111111111110110";		-- B = -10
 		WAIT UNTIL rising_edge(done);
 		start <= '0';
 		
