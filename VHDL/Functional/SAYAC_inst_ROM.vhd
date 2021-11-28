@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		SAYAC_inst_ROM.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		SAYAC_inst_ROM.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
---	History:
---	Date:			27 April 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		27 April 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -94,5 +94,5 @@ BEGIN
 	addrInst <= X"0000", X"0001" AFTER 25 NS, X"0002" AFTER 30 NS;
 	
 	InstructionROM : ENTITY WORK.inst_ROM GENERIC MAP (	3 ) 
-						PORT MAP (clk, rst, readInst, addrInst, Inst);
+				PORT MAP (clk, rst, readInst, addrInst, Inst);
 END ARCHITECTURE test;
