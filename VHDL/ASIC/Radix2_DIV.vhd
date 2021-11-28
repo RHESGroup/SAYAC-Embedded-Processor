@@ -1,10 +1,10 @@
 --******************************************************************************
---	Filename:		Divider.vhd
---	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
+--  Filename:		Radix2_DIV.vhd
+--  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
---	History:
---	Date:			21 May 2021
---	Last Author: 	HANIEH
+--  History:
+--  Date:		20 November 2021
+--  Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Teheran
 --  This source file may be used and distributed without
 --  restriction provided that this copyright statement is not
@@ -14,8 +14,9 @@
 
 --******************************************************************************
 --	File content description:
---	Divider unit of the SAYAC core                                 
+--	Radix2 divider unit of the SAYAC core                                 
 --******************************************************************************
+--
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
@@ -55,7 +56,7 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
   
-ENTITY DatapathDIV IS
+ENTITY Datapath_Radix2_DIV IS
 	PORT (
 		clk, rst : IN STD_LOGIC;
 		load_R, shift_R, shift_Q, load_Q, load_M : IN STD_LOGIC;
@@ -64,9 +65,9 @@ ENTITY DatapathDIV IS
 		outDIV : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 		sign : OUT STD_LOGIC
 	);
-END ENTITY DatapathDIV;
+END ENTITY Datapath_Radix2_DIV;
 
-ARCHITECTURE behaviour OF DatapathDIV IS
+ARCHITECTURE behaviour OF Datapath_Radix2_DIV IS
 	SIGNAL mux1Out, Rprev, mux2Out, Qprev, M, subResult, notM : STD_LOGIC_VECTOR (16 DOWNTO 0);
 	SIGNAL serOutQ, serOutR : STD_LOGIC;
 BEGIN	
@@ -101,21 +102,20 @@ LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
-ENTITY ControllerDIV IS
+ENTITY Controller_Radix2_DIV IS
 	PORT (
 		clk, rst, start, sign: IN STD_LOGIC;
 		load_R, shift_R, shift_Q, load_Q : OUT STD_LOGIC;
 		load_M, setQ0, setR, Q0, clr_R, readyDIV : OUT STD_LOGIC
 	);
-END ENTITY ControllerDIV;
+END ENTITY Controller_Radix2_DIV;
 
-ARCHITECTURE behaviour OF ControllerDIV IS
+ARCHITECTURE behaviour OF Controller_Radix2_DIV IS
 	TYPE state IS (IDLE, LOAD, SHIFT, SUB);
 	SIGNAL ps, ns : state;
 	SIGNAL co, incCnt, iniCnt : STD_LOGIC;
 	SIGNAL cnt, cntinc : STD_LOGIC_VECTOR (4 DOWNTO 0);
 BEGIN  
---	Counter #(5) counter(cnt, 5'd15, co, incCnt, iniCnt, clk, rst);
 	INCrementer : ENTITY WORK.INC  GENERIC MAP (5) PORT MAP (cnt, cntinc);
 	PROCESS (clk, rst)
 	BEGIN
@@ -193,42 +193,42 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
-ENTITY DIV IS 
+ENTITY Radix2_DIV IS 
 	PORT ( clk, rst, start : IN STD_LOGIC;
 		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
 		readyDIV : OUT STD_LOGIC;
 		outDIV: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );
-END DIV;	 
+END Radix2_DIV;	 
 
-ARCHITECTURE behavioral_DIV OF DIV IS
+ARCHITECTURE behavioral_Radix2_DIV OF Radix2_DIV IS
 	SIGNAL sign, load_R, shift_R, ready_reg : STD_LOGIC;
 	SIGNAL shift_Q, load_Q, load_M, setQ0, setR, Q0, clr_R : STD_LOGIC;
 	SIGNAL result : STD_LOGIC_VECTOR (31 DOWNTO 0);
 BEGIN
-	DP : ENTITY WORK.DatapathDIV PORT MAP
+	DP : ENTITY WORK.Datapath_Radix2_DIV PORT MAP
 			(clk, rst, load_R, shift_R, shift_Q, load_Q, load_M, setQ0, setR, Q0, clr_R, B, A, result, sign);
 	
-	CU : ENTITY WORK.ControllerDIV PORT MAP
+	CU : ENTITY WORK.Controller_Radix2_DIV PORT MAP
 			(clk, rst, start, sign, load_R, shift_R, shift_Q, load_Q, load_M, setQ0, setR, Q0, clr_R, ready_reg);
 			
 	outDIV <= result WHEN ready_reg = '1';
 	readyDIV <= ready_reg;
-END behavioral_DIV; 
+END behavioral_Radix2_DIV; 
 ---------------------------------------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
 
-ENTITY DIV_TB IS 
-END DIV_TB;
+ENTITY Radix2_DIV_TB IS 
+END Radix2_DIV_TB;
 
-ARCHITECTURE behavioral_TB OF DIV_TB IS
+ARCHITECTURE behavioral_TB OF Radix2_DIV_TB IS
 	SIGNAL clk : STD_LOGIC := '1';
 	SIGNAL rst, done, start : STD_LOGIC;
 	SIGNAL A, B : STD_LOGIC_VECTOR (16 DOWNTO 0);
 	SIGNAL result_DIV : STD_LOGIC_VECTOR (31 DOWNTO 0);
 BEGIN
-	DIVU : ENTITY WORK.DIV 
+	DIVU : ENTITY WORK.Radix2_DIV 
 		PORT MAP (clk, rst, start, A, B, done, result_DIV);
 	
 	clk <= NOT clk AFTER 2.5 NS WHEN NOW <= 2000 NS ELSE '0';
