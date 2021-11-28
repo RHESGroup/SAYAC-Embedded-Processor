@@ -16,7 +16,6 @@
 --	File content description:
 --	Radix16 multiplier unit of the SAYAC core                                 
 --******************************************************************************
---
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
@@ -218,7 +217,8 @@ END Datapath_Radix16_MUL;
 ARCHITECTURE behavioral_DP OF Datapath_Radix16_MUL IS 	
 	SIGNAL A_reg : STD_LOGIC_VECTOR (17 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL B_reg, P_reg : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL AS_out, in2_AS, in2_AS_bar, incin2 : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL AS_out, in2_AS : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL incin2 : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL B2, B3, B4, B5, B6, B7, B8 : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL in2_AS_sel : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL A_reg_32 : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0');
@@ -303,9 +303,9 @@ BEGIN
 	END PROCESS;
 	
 --AddSub	
-	in2_AS_bar <= NOT in2_AS;
-	INCrementer : ENTITY WORK.INC GENERIC MAP (17) PORT MAP (in2_AS_bar, incin2);
-	in2_AS_sel <= in2_AS WHEN sel_AS = '0' ELSE incin2;
+	COMPAS : ENTITY WORK.COMP PORT MAP 
+			(in2_AS(15 DOWNTO 0), '1', incin2);
+	in2_AS_sel <= in2_AS WHEN sel_AS = '0' ELSE (incin2(15) & incin2);
 	cin1 <= cin  WHEN sel_AS = '0' ELSE '0';
 	ADD1 : ENTITY WORK.CLA17
 		PORT MAP(P_reg, in2_AS_sel, cin1, AS_out);
