@@ -99,8 +99,8 @@ ARCHITECTURE behavioral OF CLA16 IS
 
 	COMPONENT GAP IS
 		GENERIC (
-				m : INTEGER := 4
-			);
+			m : INTEGER := 4
+		);
 		PORT ( 
 			x, y : IN STD_LOGIC_VECTOR(m-1 DOWNTO 0);
 			P,G : OUT STD_LOGIC_VECTOR(m-1 DOWNTO 0) 
@@ -131,8 +131,8 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY CLA_block IS
 	GENERIC (
-			m : INTEGER := 4
-		);
+		m : INTEGER := 4
+	);
 	PORT ( 
 		x, y  : IN STD_LOGIC_VECTOR(m-1 DOWNTO 0);
 		cin : IN STD_LOGIC;
@@ -146,8 +146,8 @@ ARCHITECTURE behavioral OF CLA_block IS
 
 	COMPONENT GAP IS
 		GENERIC (
-				m : INTEGER := 4
-			);
+			m : INTEGER := 4
+		);
 		PORT ( 
 			x, y : IN STD_LOGIC_VECTOR(m-1 DOWNTO 0);
 			P,G : OUT STD_LOGIC_VECTOR(m-1 DOWNTO 0) 
@@ -207,8 +207,8 @@ USE IEEE.numeric_std.ALL;
 
 ENTITY GAP IS
 	GENERIC (
-			m : INTEGER := 4
-		);
+		m : INTEGER := 4
+	);
 	PORT ( 
 		x, y  : IN STD_LOGIC_VECTOR(m-1 DOWNTO 0);
 --		P, G, A : OUT STD_LOGIC_VECTOR(m-1 DOWNTO 0)
@@ -261,14 +261,14 @@ BEGIN
 	c(0) <= g(0) OR (p(0) AND cin);
 	c(1) <= g(1) OR (p(1) AND g(0)) OR (p(1) AND p(0) AND cin);
 	c(2) <= g(2) OR (p(2) AND g(1)) OR (p(2) AND p(1) AND g(0))
-			OR (p(2) AND p(1)AND p(0) AND cin);	
+		OR (p(2) AND p(1)AND p(0) AND cin);	
 	c(3) <= g(3) OR (p(3) AND g(2)) OR (p(3) AND p(2) AND g(1))
-			OR (p(3) AND p(2) AND p(1) AND g(0))
-			OR (p(3) AND p(2) AND p(1) AND p(0) AND cin);
+		OR (p(3) AND p(2) AND p(1) AND g(0))
+		OR (p(3) AND p(2) AND p(1) AND p(0) AND cin);
 	c(4) <= g(4) OR (p(4) AND g(3)) OR (p(4) AND p(3) AND g(2))
-			OR (p(4) AND p(3) AND p(2) AND g(1))
-			OR (p(4) AND p(3) AND p(2) AND p(1) AND g(0))
-			OR (p(4) AND p(3) AND p(2) AND p(1) AND P(0) AND cin);
+		OR (p(4) AND p(3) AND p(2) AND g(1))
+		OR (p(4) AND p(3) AND p(2) AND p(1) AND g(0))
+		OR (p(4) AND p(3) AND p(2) AND p(1) AND P(0) AND cin);
 	c(5) <= g(5) OR (p(5) AND g(4)) OR (p(5) AND p(4) AND g(3))
 		OR (p(5) AND p(4) AND p(3) AND g(2))
 		OR (p(5) AND p(4) AND p(3) AND p(2) AND g(1))
@@ -456,27 +456,27 @@ BEGIN
 	BEGIN
 		x <= "00000000000000000000000000110100"; -- 52
 		y <= "00000000000000000000000000100110"; -- 38
-		cin <= '0';				  -- 90
+		cin <= '0';				 -- 90
 		
 		WAIT FOR 9 NS;
 		x <= "11111111111111110000000100011000"; -- -
 		y <= "11111111111111110000001000010000"; -- -
-		cin <= '1';				  -- -
+		cin <= '1';				 -- -
 			
-		x <= X"FFFFFF7F";						-- A = -129
-		y <= X"00000202";						-- B = 514
+		x <= X"FFFFFF7F";			-- A = -129
+		y <= X"00000202";			-- B = 514
 		WAIT FOR 9 NS;
 		cin <= '0';
 		
 		WAIT FOR 8 NS;
 		x <= "11111111111111110100000100011000"; -- -
 		y <= "00000000000000000011001000010000"; -- 
-		cin <= '1';				  -- -
+		cin <= '1';				 -- -
 		
 		WAIT FOR 3 NS;
 		x <= "00000000111111110100000100011000"; -- -
 		y <= "00000000000000000011001000010000"; -- 
-		cin <= '0';				  -- -
+		cin <= '0';				 -- -
 		WAIT;
 	END PROCESS;
 END behavioral_TB;
@@ -514,19 +514,19 @@ BEGIN
 		x <= "0000000000001010"; 		-- A = 10
 		y <= "1111111111111011";		-- B = -5
 		WAIT FOR 5 NS;
-		x <= X"FF7F"; 					-- A = -129
-		y <= X"0202";					-- B = 514
+		x <= X"FF7F"; 				-- A = -129
+		y <= X"0202";				-- B = 514
 		WAIT FOR 5 NS;
 		cin <= '1';
 		WAIT FOR 5 NS;
-		x <= X"0A50"; 					-- A = 2640
-		y <= X"0080";					-- B = 128
+		x <= X"0A50"; 				-- A = 2640
+		y <= X"0080";				-- B = 128
 		WAIT FOR 5 NS;	
 		x <= "1111111111110111"; 		-- A = -9
 		y <= "0000000000010001";		-- B = 17
 		WAIT FOR 5 NS;	
-		x <= X"FFF3"; 					-- A = -13
-		y <= X"FFF6";					-- B = -10
+		x <= X"FFF3"; 				-- A = -13
+		y <= X"FFF6";				-- B = -10
 		WAIT FOR 5 NS;
 		WAIT;
 	END PROCESS;
