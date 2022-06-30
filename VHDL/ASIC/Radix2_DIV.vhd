@@ -1,36 +1,20 @@
---******************************************************************************
---  Filename:		Radix2_DIV.vhd
---  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.990
---  History:
---  Date:		20 November 2021
---  Last Author: 	HANIEH
---  Copyright (C) 2021 University of Teheran
---  This source file may be used and distributed without
---  restriction provided that this copyright statement is not
---  removed from the file and that any derivative work contains
---  the original copyright notice and the associated disclaimer.
 --
-
---******************************************************************************
---	File content description:
---	Radix2 divider unit of the SAYAC core                                 
---******************************************************************************
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
   
 ENTITY SHR IS
+	GENERIC ( n : INTEGER := 17	);
 	PORT (
 		clk, rst, serIN, enSHR, initSHR, ldSHR : IN STD_LOGIC;
-		inSHR : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
-		outSHR   : OUT STD_LOGIC_VECTOR(16 DOWNTO 0);
+		inSHR : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
+		outSHR   : OUT STD_LOGIC_VECTOR(n-1 DOWNTO 0);
 		serOUT : OUT STD_LOGIC
 	);
 END ENTITY SHR;
 
 ARCHITECTURE behaviour OF SHR IS
-	SIGNAL outSHR_reg : STD_LOGIC_VECTOR (16 DOWNTO 0);
+	SIGNAL outSHR_reg : STD_LOGIC_VECTOR (n-1 DOWNTO 0);
 BEGIN
 	PROCESS (clk, rst)
 	BEGIN
@@ -42,13 +26,13 @@ BEGIN
 			ELSIF ldSHR = '1' THEN
 				outSHR_reg <= inSHR;
 			ELSIF enSHR = '1' THEN
-				outSHR_reg <= (outSHR_reg(15 DOWNTO 0) & serIN);
+				outSHR_reg <= (outSHR_reg(n-2 DOWNTO 0) & serIN);
 			END IF;
 		END IF;
 	END PROCESS;
 	
 	outSHR <= outSHR_reg;
-	serOUT <= outSHR_reg(16);
+	serOUT <= outSHR_reg(n-1);
 END ARCHITECTURE behaviour;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -70,10 +54,10 @@ ARCHITECTURE behaviour OF Datapath_Radix2_DIV IS
 	SIGNAL mux1Out, Rprev, mux2Out, Qprev, M, subResult, notM : STD_LOGIC_VECTOR (16 DOWNTO 0);
 	SIGNAL serOutQ, serOutR : STD_LOGIC;
 BEGIN	
-	shReg_R: ENTITY WORK.SHR PORT MAP
-			(clk, rst, serOutQ, shift_R, clr_R, load_R, mux1Out, Rprev, serOutR);
-	shReg_Q: ENTITY WORK.SHR PORT MAP
-			(clk, rst, '0', shift_Q, '0', load_Q, mux2Out, Qprev, serOutQ);
+	shReg_R: ENTITY WORK.SHR GENERIC MAP (17)
+				PORT MAP (clk, rst, serOutQ, shift_R, clr_R, load_R, mux1Out, Rprev, serOutR);
+	shReg_Q: ENTITY WORK.SHR GENERIC MAP (17)
+				PORT MAP (clk, rst, '0', shift_Q, '0', load_Q, mux2Out, Qprev, serOutQ);
 	
 	PROCESS (clk, rst)
 	BEGIN

@@ -3,7 +3,7 @@
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
 --	History:
---	Date:			27 April 2021
+--	Date:			13 May 2022
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
@@ -34,13 +34,13 @@ ENTITY inst_ROM IS
 	);
 END ENTITY inst_ROM;
 
-ARCHITECTURE behaviour OF inst_ROM IS
+ARCHITECTURE behavior OF inst_ROM IS
 	TYPE inst_mem IS ARRAY (0 TO numofinst-1) OF STD_LOGIC_VECTOR(15 DOWNTO 0);
 	SIGNAL instMEM : inst_mem;
 	
 	IMPURE FUNCTION InitRomFromFile 
 	RETURN inst_mem IS
-		FILE RomFile : TEXT OPEN read_mode IS "Matrix_Multiplication_inst.txt";
+		FILE RomFile : TEXT OPEN read_mode IS "INT_inst.txt";
 		VARIABLE RomFileLine : LINE;
 		VARIABLE GOOD : BOOLEAN;
 		VARIABLE fstatus: FILE_OPEN_STATUS;
@@ -76,7 +76,7 @@ BEGIN
 	
 	Inst <= instMEM(TO_INTEGER(UNSIGNED(addrInst))) WHEN readInst = '1' ELSE
 			(OTHERS => 'Z');
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;

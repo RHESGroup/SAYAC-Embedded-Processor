@@ -1,29 +1,12 @@
---******************************************************************************
---  Filename:		CLA17.vhd
---  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.990
---  History:
---  Date:		21 May 2021
---  Last Author: 	HANIEH
---  Copyright (C) 2021 University of Teheran
---  This source file may be used and distributed without
---  restriction provided that this copyright statement is not
---  removed from the file and that any derivative work contains
---  the original copyright notice and the associated disclaimer.
 --
-
---******************************************************************************
---	File content description:
---	17-bit Carry Look Ahead Adder                                 
---******************************************************************************
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.numeric_std.ALL;
 
 ENTITY GAP IS
 	GENERIC (
-		m : INTEGER := 4
-	);
+			m : INTEGER := 4
+		);
 	PORT ( 
 		x, y  : IN STD_LOGIC_VECTOR(m-1 DOWNTO 0);
 		P, G : OUT STD_LOGIC_VECTOR(m-1 DOWNTO 0)

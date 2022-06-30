@@ -1,27 +1,9 @@
 --******************************************************************************
---  Filename:		SAYAC_DPB.vhd
---  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.990
---  History:
---  Date:		28 November 2021
---  Last Author: 	HANIEH
---  Copyright (C) 2021 University of Tehran
---  This source file may be used and distributed without
---  restriction provided that this copyright statement is not
---  removed from the file and that any derivative work contains
---  the original copyright notice and the associated disclaimer.
---
-
---******************************************************************************
---	File content description:
---	DataPath Blocks (DPB) of the SAYAC core                                 
---******************************************************************************
---******************************************************************************
 --	Filename:		SAYAC_DPB.vhd
 --	Project:		SAYAC : Simple Architecture Yet Ample Circuitry
 --  Version:		0.990
 --	History:
---	Date:			28 November 2021
+--	Date:			13 May 2022
 --	Last Author: 	HANIEH
 --  Copyright (C) 2021 University of Tehran
 --  This source file may be used and distributed without
@@ -34,6 +16,7 @@
 --	File content description:
 --	DataPath Blocks (DPB) of the SAYAC core                                 
 --******************************************************************************
+
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE IEEE.numeric_std.ALL;
@@ -41,20 +24,24 @@ USE IEEE.numeric_std.ALL;
 ENTITY IMM IS
 	PORT (
 		in1, in2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		in3 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
 		SE5bits, SE6bits, USE8bits, SE8bits, p1lowbits : IN STD_LOGIC;
+		selrs1_imm, selcnt_imm, USE12bits : IN STD_LOGIC;
 		outIMM   : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)		
 	);
 END ENTITY IMM;
 
-ARCHITECTURE behaviour OF IMM IS
+ARCHITECTURE behavior OF IMM IS
 BEGIN
 	outIMM <= (15 DOWNTO 5 => in1(4)) & in1(4 DOWNTO 0) WHEN SE5bits = '1' ELSE
-		  (15 DOWNTO 6 => in1(5)) & in1(5 DOWNTO 0) WHEN SE6bits = '1' ELSE
-		  (15 DOWNTO 8 => '0') & in1 WHEN USE8bits = '1' ELSE
-		  (15 DOWNTO 8 => in1(7)) & in1 WHEN SE8bits = '1' ELSE
-		  in1 & in2 WHEN p1lowbits = '1' ELSE 
-		  (OTHERS => '0');
-END ARCHITECTURE behaviour;
+			  (15 DOWNTO 6 => in1(5)) & in1(5 DOWNTO 0) WHEN SE6bits = '1' ELSE
+			  (15 DOWNTO 8 => '0') & in1 WHEN USE8bits = '1' ELSE
+			  (15 DOWNTO 8 => in1(7)) & in1 WHEN SE8bits = '1' ELSE
+			  in1 & in2 WHEN p1lowbits = '1' ELSE 
+			  (15 DOWNTO 4 => '0') & in1(3 DOWNTO 0) WHEN selrs1_imm = '1' AND USE12bits = '1' ELSE
+			  (15 DOWNTO 4 => '0') & in3 WHEN selcnt_imm = '1' AND USE12bits = '1' ELSE
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -68,7 +55,7 @@ ENTITY COMP IS
 	);
 END ENTITY COMP;
 
-ARCHITECTURE behaviour OF COMP IS
+ARCHITECTURE behavior OF COMP IS
 	SIGNAL carry  : STD_LOGIC_VECTOR(16 DOWNTO 1);
 BEGIN
 	-- Half Adder
@@ -79,7 +66,7 @@ BEGIN
 			outCOMP(I) <= (NOT inCOMP(I)) XOR carry(I);
 			carry(I+1) <= (NOT inCOMP(I)) AND carry(I);
 	END GENERATE;
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -93,20 +80,20 @@ ENTITY LLU IS
 	);
 END ENTITY LLU;
 
-ARCHITECTURE behaviour OF LLU IS
+ARCHITECTURE behavior OF LLU IS
 	SIGNAL onebartwo : STD_LOGIC;
 	SIGNAL outCOMP : STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
 	onebartwo <= '0' WHEN onesComp = '1' ELSE
-		     '1' WHEN twosComp = '1' ELSE '0';
+				 '1' WHEN twosComp = '1' ELSE '0';
 				 
 	COMPlementer : ENTITY WORK.COMP PORT MAP 
-				(in1, onebartwo, outCOMP);
+					(in1, onebartwo, outCOMP);
 	
 	outLLU <= (in1 AND in2) WHEN logicAND = '1' ELSE
-		  outCOMP WHEN onesComp = '1' OR twosComp = '1' ELSE
-		  (OTHERS => '0');
-END ARCHITECTURE behaviour;
+			  outCOMP WHEN onesComp = '1' OR twosComp = '1' ELSE
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -120,19 +107,19 @@ ENTITY ASU IS
 	);
 END ENTITY ASU;
 
-ARCHITECTURE behaviour OF ASU IS
+ARCHITECTURE behavior OF ASU IS
 	SIGNAL cin : STD_LOGIC;
 	SIGNAL input2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
 	cin <= '0' WHEN arithADD = '1' ELSE
-	       '1' WHEN arithSUB = '1' ELSE '0';
+		   '1' WHEN arithSUB = '1' ELSE '0';
 	input2 <= in2 WHEN arithADD = '1' ELSE
-		  (NOT in2) WHEN arithSUB = '1' ELSE 
-		  (OTHERS => '0');
+			  (NOT in2) WHEN arithSUB = '1' ELSE 
+			  (OTHERS => '0');
 	
 	ADD1 : ENTITY WORK.CLA GENERIC MAP(16, 16) 
 			PORT MAP (in1, input2, cin, outASU);
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -147,44 +134,158 @@ ENTITY SHU IS
 	);
 END ENTITY SHU;
 
-ARCHITECTURE behaviour OF SHU IS
-	SIGNAL cases : STD_LOGIC_VECTOR(2 DOWNTO 0);
-	SIGNAL outSHU_reg : STD_LOGIC_VECTOR(16 DOWNTO 0);
+ARCHITECTURE behavior OF SHU IS	
+	SIGNAL	cases			:	STD_LOGIC_VECTOR(2 DOWNTO 0);
+	SIGNAL	outSHU_reg		:	STD_LOGIC_VECTOR(16 DOWNTO 0);
+	SIGNAL	right_SHU_reg	:	STD_LOGIC_VECTOR(16 DOWNTO 0);
+	SIGNAL	left_SHU_reg	:	STD_LOGIC_VECTOR(16 DOWNTO 0);
+	SIGNAL	ser				:	STD_LOGIC;
+	ALIAS	shift_num		:	STD_LOGIC_VECTOR(3	DOWNTO	0)	IS	in2(3 DOWNTO 0);
 BEGIN	
-	cases <= (in2(4) & logicSH & arithSH);
+	cases	<=	(in2(4) & logicSH & arithSH);
+	ser		<=	in1(15)	WHEN	arithSH = '1' ELSE '0';	
+
+	-- outSHU_reg(15 DOWNTO	in2)		<= in1((15 - in2) DOWNTO 0);
+	-- outSHU_reg((in2 - 1) DOWNTO 0)	<= (OTHERS => '0');
 	
-	PROCESS (in2, logicSH, arithSH, cases, in1)
+	PROCESS	(	in1, shift_num, ser	)
+	BEGIN
+		CASE	shift_num	IS
+			WHEN	"0000"	=>
+				right_SHU_reg(15 DOWNTO 0)	<=	in1(15 DOWNTO 0);
+				right_SHU_reg(16)			<=	ser;
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 0)	<=	in1(15 DOWNTO 0);
+			WHEN	"0001"	=>
+				right_SHU_reg(14 DOWNTO 0)	<=	in1(15 DOWNTO 1);
+				right_SHU_reg(16 DOWNTO 15)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 1)	<=	in1(14 DOWNTO 0);
+				left_SHU_reg(0)				<=	'0';
+			WHEN	"0010"	=>
+				right_SHU_reg(13 DOWNTO 0)	<=	in1(15 DOWNTO 2);
+				right_SHU_reg(16 DOWNTO 14)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 2)	<=	in1(13 DOWNTO 0);
+				left_SHU_reg(1  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"0011"	=>
+				right_SHU_reg(12 DOWNTO 0)	<=	in1(15 DOWNTO 3);
+				right_SHU_reg(16 DOWNTO 13)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 3)	<=	in1(12 DOWNTO 0);
+				left_SHU_reg(2  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"0100"	=>
+				right_SHU_reg(11 DOWNTO 0)	<=	in1(15 DOWNTO 4);
+				right_SHU_reg(16 DOWNTO 12)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 4)	<=	in1(11 DOWNTO 0);
+				left_SHU_reg(3  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"0101"	=>
+				right_SHU_reg(10 DOWNTO 0)	<=	in1(15 DOWNTO 5);
+				right_SHU_reg(16 DOWNTO 11)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 5)	<=	in1(10 DOWNTO 0);
+				left_SHU_reg(4  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"0110"	=>
+				right_SHU_reg(9	DOWNTO 0)	<=	in1(15 DOWNTO 6);
+				right_SHU_reg(16 DOWNTO 10)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 6)	<=	in1(9 DOWNTO 0);
+				left_SHU_reg(5  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"0111"	=>
+				right_SHU_reg(8	DOWNTO 0)	<=	in1(15 DOWNTO 7);
+				right_SHU_reg(16 DOWNTO 9)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 7)	<=	in1(8 DOWNTO 0);
+				left_SHU_reg(6  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1000"	=>
+				right_SHU_reg(7	DOWNTO 0)	<=	in1(15 DOWNTO 8);
+				right_SHU_reg(16 DOWNTO 8)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 8)	<=	in1(7 DOWNTO 0);
+				left_SHU_reg(7  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1001"	=>
+				right_SHU_reg(6	DOWNTO 0)	<=	in1(15 DOWNTO 9);
+				right_SHU_reg(16 DOWNTO 7)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 9)	<=	in1(6 DOWNTO 0);
+				left_SHU_reg(8  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1010"	=>
+				right_SHU_reg(5	DOWNTO 0)	<=	in1(15 DOWNTO 10);
+				right_SHU_reg(16 DOWNTO 6)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 10)	<=	in1(5 DOWNTO 0);
+				left_SHU_reg(9  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1011"	=>
+				right_SHU_reg(4	DOWNTO 0)	<=	in1(15 DOWNTO 11);
+				right_SHU_reg(16 DOWNTO 5)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 11)	<=	in1(4 DOWNTO 0);
+				left_SHU_reg(10  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1100"	=>
+				right_SHU_reg(3	DOWNTO 0)	<=	in1(15 DOWNTO 12);
+				right_SHU_reg(16 DOWNTO 4)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 12)	<=	in1(3 DOWNTO 0);
+				left_SHU_reg(11  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1101"	=>
+				right_SHU_reg(2	DOWNTO 0)	<=	in1(15 DOWNTO 13);
+				right_SHU_reg(16 DOWNTO 3)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 13)	<=	in1(2 DOWNTO 0);
+				left_SHU_reg(12  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1110"	=>
+				right_SHU_reg(1	DOWNTO 0)	<=	in1(15 DOWNTO 14);
+				right_SHU_reg(16 DOWNTO 2)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15 DOWNTO 14)	<=	in1(1 DOWNTO 0);
+				left_SHU_reg(13  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	"1111"	=>
+				right_SHU_reg(0)			<=	in1(15);
+				right_SHU_reg(16 DOWNTO 1)	<=	(OTHERS => ser);
+				
+				left_SHU_reg(16) 			<=	'0';
+				left_SHU_reg(15)			<=	in1(0);
+				left_SHU_reg(14  DOWNTO 0)	<=	(OTHERS => '0');
+			WHEN	OTHERS	=>
+			
+		END CASE;
+	END PROCESS;
+	
+--	PROCESS (in2, logicSH, arithSH, cases, in1)
+	PROCESS (right_SHU_reg, cases, left_SHU_reg)
 	BEGIN		
 		CASE cases IS
 			WHEN "001" =>						-- arithmetic right shift
-				outSHU_reg((15 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) DOWNTO 0) <= 
-						in1(15 DOWNTO TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))));
-				outSHU_reg(16 DOWNTO (16 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))) - 1)) <= 
-						(OTHERS => in1(15));
+				outSHU_reg	<=	right_SHU_reg;
 			WHEN "010" =>						-- logical right shift
-				outSHU_reg((15 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) DOWNTO 0) <= 
-						in1(15 DOWNTO TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))));
-				outSHU_reg(16 DOWNTO (16 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))) - 1)) <= 
-						(OTHERS => '0');
+				outSHU_reg	<=	right_SHU_reg;
 			WHEN "101" =>						-- arithmetic left shift
-				outSHU_reg(16) <= '0';
-				outSHU_reg(15 DOWNTO TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) <= 
-						in1((15 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) DOWNTO 0);
-				outSHU_reg((TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))) - 1) DOWNTO 0) <= 
-						(OTHERS => '0');
+				outSHU_reg	<=	left_SHU_reg;
 			WHEN "110" =>						-- logic left shift
-				outSHU_reg(16) <= '0';
-				outSHU_reg(15 DOWNTO TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) <= 
-						in1((15 - TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0)))) DOWNTO 0);
-				outSHU_reg((TO_INTEGER(UNSIGNED(in2(3 DOWNTO 0))) - 1) DOWNTO 0) <= 
-						(OTHERS => '0');
+				outSHU_reg	<=	left_SHU_reg;
 			WHEN OTHERS =>
 				outSHU_reg <=  (OTHERS => '0');
 		END CASE;
 	END PROCESS;
 	
 	outSHU <= outSHU_reg(15 DOWNTO 0);
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -195,11 +296,12 @@ ENTITY MDU IS
 		clk, rst, startMDU, arithMUL, arithDIV, signMDU, ldMDU1, ldMDU2 : IN STD_LOGIC;
 		in1, in2          : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
 		outMDU1, outMDU2  : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
+		DividedByZero     : OUT STD_LOGIC;
 		readyMDU          : OUT STD_LOGIC
 	);
 END ENTITY MDU;
 
-ARCHITECTURE behaviour OF MDU IS
+ARCHITECTURE behavior OF MDU IS
 	SIGNAL outMDU_reg, outMULT, outDIV : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL opr1, opr2 : STD_LOGIC_VECTOR(16 DOWNTO 0);
 	SIGNAL inp1, inp2 : STD_LOGIC_VECTOR(16 DOWNTO 0);
@@ -212,33 +314,54 @@ BEGIN
 	opr2 <= (in2(15) & in2) WHEN signMDU = '1' ELSE ('0' & in2);
 	
 	COMPin1 : ENTITY WORK.COMP PORT MAP 
-			(in1, '1', twosCompin1);
+					(in1, '1', twosCompin1);
 	COMPin2 : ENTITY WORK.COMP PORT MAP 
-			(in2, '1', twosCompin2);
+					(in2, '1', twosCompin2);
 	inp1 <= (twosCompin1(15) & twosCompin1) WHEN (in1(15) AND signMDU) = '1' ELSE ('0' & in1);
 	inp2 <= (twosCompin2(15) & twosCompin2) WHEN (in2(15) AND signMDU) = '1' ELSE ('0' & in2);
 	
 	startMULT <= arithMUL AND startMDU;
-	startDIV  <= arithDIV AND startMDU;
+	startDIV  <= arithDIV AND startMDU WHEN inp2 /= "00000000000000000" ELSE '0';
 	
-	MULT : ENTITY WORK.Radix4_MUL
---	MULT : ENTITY WORK.Radix16_MUL
-		PORT MAP (clk, rst, startMULT, '0', opr1, opr2, doneMULT, outMULT);
+--	MULT : ENTITY WORK.Booth_MUL
+--	MULT : ENTITY WORK.Radix4_MUL
+	-- MULT : ENTITY WORK.Radix16_MUL
+		-- PORT MAP (clk, rst, startMULT, opr1, opr2, doneMULT, outMULT);
 	
-	DIVU : ENTITY WORK.Radix2_DIV 
-		PORT MAP (clk, rst, startDIV, inp1, inp2, doneDIV, outDIV);
+	-- DIVU : ENTITY WORK.Radix2_DIV 
+		-- PORT MAP (clk, rst, startDIV, inp1, inp2, doneDIV, outDIV);
 	
 	COMPQ : ENTITY WORK.COMP PORT MAP 
-			(outDIV(15 DOWNTO 0), '1', twosCompQ);
+					(outDIV(15 DOWNTO 0), '1', twosCompQ);
 	COMPR : ENTITY WORK.COMP PORT MAP 
-			(outDIV(31 DOWNTO 16), '1', twosCompR);
+					(outDIV(31 DOWNTO 16), '1', twosCompR);
 	Q <= twosCompQ WHEN ((in1(15) XOR in2(15)) AND signMDU) = '1' ELSE outDIV(15 DOWNTO 0);
 	R <= twosCompR WHEN (in1(15) AND signMDU) = '1' ELSE outDIV(31 DOWNTO 16);
 	
-	outMDU_reg <= outMULT WHEN arithMUL = '1' ELSE
-		      (R & Q) WHEN arithDIV = '1';
+	-- outMDU_reg <= outMULT WHEN arithMUL = '1' ELSE
+				  -- (R & Q) WHEN arithDIV = '1';
 	
-	readyMDU <= (arithMUL AND doneMULT) OR (arithDIV AND doneDIV);
+	DividedByZero <= '1' WHEN arithDIV = '1' AND inp2 = "00000000000000000" ELSE '0';
+--	readyMDU     <= (arithMUL AND doneMULT) OR (arithDIV AND doneDIV);
+					
+	PROCESS (doneMULT, arithMUL, arithDIV, doneDIV, inp2, outMULT, R, Q)
+	BEGIN
+		IF arithMUL = '1' THEN
+			readyMDU   <= doneMULT;
+			outMDU_reg <= outMULT;
+		ELSIF arithDIV = '1' THEN
+			IF inp2 = "00000000000000000" THEN
+				readyMDU   <= '1';
+				outMDU_reg <= (OTHERS => '0');
+			ELSE
+				readyMDU   <= doneDIV;
+				outMDU_reg <= (R & Q);
+			END IF;
+		ELSE
+			readyMDU   <= '0';
+			outMDU_reg <= (OTHERS => '0');
+		END IF;
+	END PROCESS;
 	
 	PROCESS (clk, rst)
 	BEGIN
@@ -261,7 +384,7 @@ BEGIN
 			END IF;
 		END IF;
 	END PROCESS;
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -275,7 +398,7 @@ ENTITY CMP IS
 	);
 END ENTITY CMP;
 
-ARCHITECTURE behaviour OF CMP IS
+ARCHITECTURE behavior OF CMP IS
 	SIGNAL ina, inb : STD_LOGIC_VECTOR (15 DOWNTO 0);
 BEGIN
 	-- eq <= '1' WHEN TO_INTEGER(UNSIGNED(in2)) = TO_INTEGER(UNSIGNED(in1)) ELSE '0';
@@ -296,7 +419,7 @@ BEGIN
 			gt <= '0';		eq <= '0';
 		END IF;
 	END PROCESS;
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -312,11 +435,11 @@ ENTITY ADD IS
 	);
 END ENTITY ADD;
 
-ARCHITECTURE behaviour OF ADD IS
+ARCHITECTURE behavior OF ADD IS
 BEGIN
-	ADD1 : ENTITY WORK.CLA GENERIC MAP(16, 16)
+	ADD1 : ENTITY WORK.CLA GENERIC MAP(n, n)
 			PORT MAP (in1, in2, '0', outADD);
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -324,7 +447,7 @@ USE IEEE.numeric_std.ALL;
 	
 ENTITY MUX2ofnbits IS
 	GENERIC (
-		n : INTEGER := 16	-- number of input bits
+		n : INTEGER := 16 -- number of input bits
 	);
 	PORT (
 		in1, in2   : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
@@ -333,12 +456,12 @@ ENTITY MUX2ofnbits IS
 	);
 END ENTITY MUX2ofnbits;
 
-ARCHITECTURE behaviour OF MUX2ofnbits IS
+ARCHITECTURE behavior OF MUX2ofnbits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-		  in2 WHEN sel2 = '1' ELSE 
-		  (OTHERS => '0');
-END ARCHITECTURE behaviour;
+			  in2 WHEN sel2 = '1' ELSE 
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -353,18 +476,61 @@ ENTITY MUX8of16bits IS
 	);
 END ENTITY MUX8of16bits;
 
-ARCHITECTURE behaviour OF MUX8of16bits IS
+ARCHITECTURE behavior OF MUX8of16bits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-		  in2 WHEN sel2 = '1' ELSE 
-		  in3 WHEN sel3 = '1' ELSE 
-		  in4 WHEN sel4 = '1' ELSE 
-		  in5 WHEN sel5 = '1' ELSE 
-		  in6 WHEN sel6 = '1' ELSE 
-		  in7 WHEN sel7 = '1' ELSE 
-		  in8 WHEN sel8 = '1' ELSE 
-		  (OTHERS => '0');
-END ARCHITECTURE behaviour;
+			  in2 WHEN sel2 = '1' ELSE 
+			  in3 WHEN sel3 = '1' ELSE 
+			  in4 WHEN sel4 = '1' ELSE 
+			  in5 WHEN sel5 = '1' ELSE 
+			  in6 WHEN sel6 = '1' ELSE 
+			  in7 WHEN sel7 = '1' ELSE 
+			  in8 WHEN sel8 = '1' ELSE 
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY MUX4of16bits IS
+	PORT (
+		in1, in2, in3, in4    : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		sel1, sel2, sel3, sel4 : IN STD_LOGIC;
+		outMUX           : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+	);
+END ENTITY MUX4of16bits;
+
+ARCHITECTURE behavior OF MUX4of16bits IS
+BEGIN
+	outMUX	<=	in1 WHEN sel1 = '1' ELSE
+				in2 WHEN sel2 = '1' ELSE 
+				in3 WHEN sel3 = '1' ELSE 
+				in4 WHEN sel4 = '1' ELSE
+				(OTHERS => '0');
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY MUX5of16bits IS
+	PORT (
+		in1, in2, in3, in4, in5      : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		sel1, sel2, sel3, sel4, sel5 : IN STD_LOGIC;
+		outMUX           			 : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+	);
+END ENTITY MUX5of16bits;
+
+ARCHITECTURE behavior OF MUX5of16bits IS
+BEGIN
+	outMUX <= in1 WHEN sel1 = '1' ELSE
+			  in2 WHEN sel2 = '1' ELSE 
+			  in3 WHEN sel3 = '1' ELSE 
+			  in4 WHEN sel4 = '1' ELSE
+			  in5 WHEN sel5 = '1' ELSE
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -378,13 +544,13 @@ ENTITY MUX3of16bits IS
 	);
 END ENTITY MUX3of16bits;
 
-ARCHITECTURE behaviour OF MUX3of16bits IS
+ARCHITECTURE behavior OF MUX3of16bits IS
 BEGIN
 	outMUX <= in1 WHEN sel1 = '1' ELSE
-		  in2 WHEN sel2 = '1' ELSE 
-		  in3 WHEN sel3 = '1' ELSE 
-		  (OTHERS => '0');
-END ARCHITECTURE behaviour;
+			  in2 WHEN sel2 = '1' ELSE 
+			  in3 WHEN sel3 = '1' ELSE 
+			  (OTHERS => '0');
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -392,7 +558,7 @@ USE IEEE.numeric_std.ALL;
 	
 ENTITY INC IS
 	GENERIC (
-		n : INTEGER := 16	-- number of input bits
+		n : INTEGER := 16 -- number of input bits
 	);
 	PORT (
 		inINC  : IN STD_LOGIC_VECTOR(n-1 DOWNTO 0);
@@ -400,7 +566,7 @@ ENTITY INC IS
 	);
 END ENTITY INC;
 
-ARCHITECTURE behaviour OF INC IS
+ARCHITECTURE behavior OF INC IS
 	SIGNAL carry  : STD_LOGIC_VECTOR(n DOWNTO 1);
 BEGIN
 	-- Half Adder
@@ -411,7 +577,7 @@ BEGIN
 			outINC(I) <= inINC(I) XOR carry(I);
 			carry(I+1) <= inINC(I) AND carry(I);
 	END GENERATE;
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -425,7 +591,7 @@ ENTITY REG IS
 	);
 END ENTITY REG;
 
-ARCHITECTURE behaviour OF REG IS
+ARCHITECTURE behavior OF REG IS
 BEGIN
 	PROCESS (clk, rst)
 	BEGIN
@@ -437,7 +603,236 @@ BEGIN
 			END IF;
 		END IF;
 	END PROCESS;
-END ARCHITECTURE behaviour;
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY REG1 IS
+	PORT (
+		clk, rst, ld : IN STD_LOGIC;
+		inREG        : IN STD_LOGIC;
+		outREG       : OUT STD_LOGIC
+	);
+END ENTITY REG1;
+
+ARCHITECTURE behavior OF REG1 IS
+BEGIN
+	PROCESS (clk, rst)
+	BEGIN
+		IF rst = '1' THEN
+			outREG <= '0';
+		ELSIF clk = '1' AND clk'EVENT THEN
+			IF ld = '1' THEN
+				outREG <= inREG;
+			END IF;
+		END IF;
+	END PROCESS;
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY CNT IS
+	PORT (
+		clk, rst, rst_cnt, inc_cnt : IN STD_LOGIC;
+		outCNT   : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)		
+	);
+END ENTITY CNT;
+
+ARCHITECTURE behavior OF CNT IS
+   SIGNAL outCNT_reg, outCNT_INC : STD_LOGIC_VECTOR(3 DOWNTO 0);
+BEGIN
+	INCrementer : ENTITY WORK.INC GENERIC MAP(4)
+					PORT MAP (outCNT_reg, outCNT_INC);
+
+  PROCESS (clk, rst)
+   BEGIN
+       IF rst = '1' THEN
+			outCNT_reg <= (OTHERS => '0');
+		ELSIF clk = '1' AND clk'EVENT THEN
+			IF rst_cnt = '1' THEN
+				outCNT_reg <= (OTHERS => '0');
+         ELSIF inc_cnt = '1' THEN
+            outCNT_reg <= outCNT_INC;
+			END IF;
+		END IF;
+   END PROCESS;
+
+   outCNT <= outCNT_reg;
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY EAG IS
+	PORT (
+		clk, rst      : IN  STD_LOGIC;
+		ldExcBaseAddr : IN  STD_LOGIC;
+		ExcSrcNum     : IN  STD_LOGIC_VECTOR(1 DOWNTO 0);
+		ExcBaseAddr   : IN  STD_LOGIC_VECTOR(15 DOWNTO 0);
+		ExcOffAddr    : IN  STD_LOGIC_VECTOR(4 DOWNTO 0);
+		ESA		      : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+	);
+END ENTITY EAG;
+
+ARCHITECTURE behavior OF EAG IS
+	SIGNAL OffAddr, BaseAddr : STD_LOGIC_VECTOR(15 DOWNTO 0);
+	SIGNAL ExcSrcNum_Mod : STD_LOGIC_VECTOR(1 DOWNTO 0);
+BEGIN
+	ExcSrcNum_Mod(0) <= ExcSrcNum(0);
+	ExcSrcNum_Mod(1) <= '1' WHEN ExcSrcNum = "00" ELSE ExcSrcNum(1);
+	-- OffAddr(15 DOWNTO (TO_INTEGER(UNSIGNED(ExcSrcNum_Mod)) - 1)) <= (15 DOWNTO (TO_INTEGER(UNSIGNED(ExcSrcNum_Mod)) + 3) => '0') & ExcOffAddr;
+	-- OffAddr((TO_INTEGER(UNSIGNED(ExcSrcNum_Mod)) - 2) DOWNTO 0) <= (OTHERS => '0');
+	OffAddr <= (OTHERS => '0') WHEN ExcSrcNum = "01" ELSE
+			   (15 DOWNTO 5 => '0') & ExcOffAddr WHEN ExcSrcNum = "10" ELSE
+			 --  (15 DOWNTO 6 => '0') & ExcOffAddr & '0' WHEN ExcSrcNum = "10" ELSE
+			   (OTHERS => '0');
+
+	BaseReg : ENTITY WORK.REG PORT MAP 
+			(clk, rst, ldExcBaseAddr, ExcBaseAddr, BaseAddr);
+	
+	AddrGen: ENTITY WORK.ADD GENERIC MAP ( 16 )
+				PORT MAP (BaseAddr, OffAddr, ESA);	
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY ESR IS
+	PORT (
+		clk, rst      : IN STD_LOGIC;
+		DividedByZero : IN STD_LOGIC;
+		InvalidInst   : IN STD_LOGIC;
+		ExcSrcNum     : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);	
+		Exception     : OUT STD_LOGIC	
+	);
+END ENTITY ESR;
+
+ARCHITECTURE behavior OF ESR IS
+   SIGNAL ExcSrcNum_reg : STD_LOGIC_VECTOR(1 DOWNTO 0);
+   SIGNAL Exception_reg : STD_LOGIC;
+BEGIN
+	PROCESS (clk, rst)
+	BEGIN
+       IF rst = '1' THEN
+			ExcSrcNum_reg <= (OTHERS => '0');
+		ELSIF clk = '1' AND clk'EVENT THEN
+			IF (DividedByZero OR InvalidInst) = '1' THEN
+				ExcSrcNum_reg(0) <= DividedByZero;
+				ExcSrcNum_reg(1) <= InvalidInst;
+			END IF;
+		END IF;
+	END PROCESS;
+	
+	Exception_reg <= ExcSrcNum_reg(0) OR ExcSrcNum_reg(1);
+	ExcSrcNum <= ExcSrcNum_reg;
+	
+	BaseReg : ENTITY WORK.REG1 PORT MAP 
+			(clk, rst, Exception_reg, Exception_reg, Exception);
+END ARCHITECTURE behavior;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+	
+ENTITY ARC IS
+	PORT (
+		dataBus, addrBus		: IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		regionSize, addrPolicy	: IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+		read_en, write_en, ldIR	: IN STD_LOGIC;
+		InstructionAccessFault	: OUT STD_LOGIC;		
+		StoreAccessFault		: OUT STD_LOGIC;	
+		LoadAccessFault			: OUT STD_LOGIC	
+	);
+END ENTITY ARC;
+
+ARCHITECTURE behavior OF ARC IS
+	SIGNAL	B_d, I_d, G_d, P_d, E_d	:	STD_LOGIC;
+	SIGNAL	B_a, I_a, G_a, P_a, E_a	:	STD_LOGIC;
+	SIGNAL	SAB, SAI				:	STD_LOGIC_VECTOR(5 DOWNTO 0);
+	SIGNAL	SAG, SAP, SAE, EAE		:	STD_LOGIC_VECTOR(5 DOWNTO 0);
+	
+	SIGNAL	InstructionRegionSize	:	STD_LOGIC_VECTOR(5	DOWNTO	0);
+	SIGNAL	GeneralRegionSize		:	STD_LOGIC_VECTOR(5	DOWNTO	0);
+	SIGNAL	PeripheralRegionSize	:	STD_LOGIC_VECTOR(5	DOWNTO	0);
+	SIGNAL	EventRegionSize			:	STD_LOGIC_VECTOR(5	DOWNTO	0);
+	ALIAS	dataBusRegionSize		:	STD_LOGIC_VECTOR(5	DOWNTO	0)	IS	dataBus(15	DOWNTO	10);
+	ALIAS	addrBusRegionSize		:	STD_LOGIC_VECTOR(5	DOWNTO	0)	IS	addrBus(15	DOWNTO	10);
+	
+	ALIAS	RWX_B					:	STD_LOGIC_VECTOR(2	DOWNTO	0)	IS	addrPolicy(14	DOWNTO	12);
+	ALIAS	RWX_I					:	STD_LOGIC_VECTOR(2	DOWNTO	0)	IS	addrPolicy(11	DOWNTO	9);
+	ALIAS	RWX_G					:	STD_LOGIC_VECTOR(2	DOWNTO	0)	IS	addrPolicy(8	DOWNTO	6);
+	ALIAS	RWX_P					:	STD_LOGIC_VECTOR(2	DOWNTO	0)	IS	addrPolicy(5	DOWNTO	3);
+	ALIAS	RWX_E					:	STD_LOGIC_VECTOR(2	DOWNTO	0)	IS	addrPolicy(2	DOWNTO	0);
+BEGIN
+	SAB						<=	"000000";
+	SAI						<=	("0000"	& regionSize(15	DOWNTO	14));
+	InstructionRegionSize	<=	('0'	& regionSize(13	DOWNTO	9));
+	GeneralRegionSize		<=	('0'	& regionSize(8	DOWNTO	4));
+	PeripheralRegionSize	<=	("0000"	& regionSize(3	DOWNTO	2));
+	EventRegionSize			<=	("0000"	& regionSize(1	DOWNTO	0));
+	
+	addSG : ENTITY WORK.RCA GENERIC MAP(6) 
+			PORT MAP (SAI, InstructionRegionSize, SAG);
+			
+	addSP : ENTITY WORK.RCA GENERIC MAP(6) 
+			PORT MAP (SAG, GeneralRegionSize, SAP);
+			
+	addSE : ENTITY WORK.RCA GENERIC MAP(6) 
+			PORT MAP (SAP, PeripheralRegionSize, SAE);
+	
+	addEE : ENTITY WORK.RCA GENERIC MAP(6) 
+			PORT MAP (SAE, EventRegionSize, EAE);
+	
+	B_d	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(dataBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAB)) AND 
+						TO_INTEGER(UNSIGNED(dataBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAI))		ELSE	'0';
+	I_d	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(dataBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAI)) AND 
+						TO_INTEGER(UNSIGNED(dataBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAG))		ELSE	'0';
+	G_d	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(dataBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAG)) AND  
+						TO_INTEGER(UNSIGNED(dataBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAP))		ELSE	'0';
+	P_d	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(dataBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAP)) AND  
+						TO_INTEGER(UNSIGNED(dataBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAE))		ELSE	'0';
+	E_d	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(dataBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAE)) AND  
+						TO_INTEGER(UNSIGNED(dataBusRegionSize))	<	TO_INTEGER(UNSIGNED(EAE))		ELSE	'0';
+						
+	B_a	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(addrBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAB)) AND 
+						TO_INTEGER(UNSIGNED(addrBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAI))		ELSE	'0';
+	I_a	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(addrBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAI)) AND 
+						TO_INTEGER(UNSIGNED(addrBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAG))		ELSE	'0';
+	G_a	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(addrBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAG)) AND  
+						TO_INTEGER(UNSIGNED(addrBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAP))		ELSE	'0';
+	P_a	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(addrBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAP)) AND  
+						TO_INTEGER(UNSIGNED(addrBusRegionSize))	<	TO_INTEGER(UNSIGNED(SAE))		ELSE	'0';
+	E_a	<=	'1'	WHEN	TO_INTEGER(UNSIGNED(addrBusRegionSize))	>=	TO_INTEGER(UNSIGNED(SAE)) AND  
+						TO_INTEGER(UNSIGNED(addrBusRegionSize))	<	TO_INTEGER(UNSIGNED(EAE))		ELSE	'0';
+	
+	InstructionAccessFault	<=	'1'	WHEN	ldIR = '1' AND ((B_d = '1' AND RWX_B(0) = '0') OR
+															(I_d = '1' AND RWX_I(0) = '0') OR
+															(G_d = '1' AND RWX_G(0) = '0') OR
+															(P_d = '1' AND RWX_P(0) = '0') OR
+															(E_d = '1' AND RWX_E(0) = '0') OR
+															(B_d = '0' AND I_d = '0' AND G_d = '0' AND P_d = '0' AND E_d = '0'))		ELSE	
+								'0';
+    StoreAccessFault		<=	'1'	WHEN	write_en = '1' AND ((B_a = '1' AND RWX_B(1) = '0') OR
+																(I_a = '1' AND RWX_I(1) = '0') OR
+																(G_a = '1' AND RWX_G(1) = '0') OR
+																(P_a = '1' AND RWX_P(1) = '0') OR
+																(E_a = '1' AND RWX_E(1) = '0') OR
+																(B_a = '0' AND I_a = '0' AND G_a = '0' AND P_a = '0' AND E_a = '0'))	ELSE	
+								'0';
+    LoadAccessFault			<=	'1'	WHEN	read_en = '1' AND  ((B_a = '1' AND RWX_B(2) = '0') OR
+																(I_a = '1' AND RWX_I(2) = '0') OR
+																(G_a = '1' AND RWX_G(2) = '0') OR
+																(P_a = '1' AND RWX_P(2) = '0') OR
+																(E_a = '1' AND RWX_E(2) = '0') OR
+																(B_a = '0' AND I_a = '0' AND G_a = '0' AND P_a = '0' AND E_a = '0'))	ELSE	
+								'0';	
+END ARCHITECTURE behavior;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
@@ -445,7 +840,9 @@ ENTITY test_IMM IS
 END ENTITY test_IMM;
 ARCHITECTURE test OF test_IMM IS
 	SIGNAL in1, in2 : STD_LOGIC_VECTOR(7 DOWNTO 0);
+	SIGNAL in3 : STD_LOGIC_VECTOR(3 DOWNTO 0);
 	SIGNAL SE5bits, SE6bits, USE8bits, SE8bits, p1lowbits : STD_LOGIC;
+	SIGNAL selrs1_imm, selcnt_imm, USE12bits : STD_LOGIC;
 	SIGNAL outIMM   : STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
 	SE5bits <= '0', '1' AFTER 1 NS, '0' AFTER 2 NS;
@@ -457,8 +854,8 @@ BEGIN
 	in2 <= X"F7", X"1C" AFTER 7 NS, X"6B" AFTER 10 NS;
 	
 	ImmediateUnit : ENTITY WORK.IMM PORT MAP 
-				(in1, in2, SE5bits, SE6bits, USE8bits, 
-				SE8bits, p1lowbits, outIMM);
+						(in1, in2, in3, SE5bits, SE6bits, USE8bits, SE8bits, 
+						 p1lowbits, selrs1_imm, selcnt_imm, USE12bits, outIMM);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -477,7 +874,7 @@ BEGIN
 	in2 <= X"2042", X"0A35" AFTER 3 NS, X"F275" AFTER 4 NS;
 	
 	LogicLogicUnit : ENTITY WORK.LLU PORT MAP 
-				(in1, in2, logicAND, onesComp, twosComp, outLLU);
+						(in1, in2, logicAND, onesComp, twosComp, outLLU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -495,7 +892,7 @@ BEGIN
 	in2 <= X"2042", X"0A35" AFTER 3 NS, X"F275" AFTER 4 NS;
 	
 	AddSubUnit : ENTITY WORK.ASU PORT MAP 
-				(in1, in2, arithADD, arithSUB, outASU);
+					(in1, in2, arithADD, arithSUB, outASU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -510,11 +907,11 @@ ARCHITECTURE test OF test_SHU IS
 BEGIN
 	logicSH <= '1', '0' AFTER 1 NS, '1' AFTER 5 NS;
 	arithSH <= '0', '1' AFTER 2 NS, '0' AFTER 4 NS;
-	in1 <= X"2E18", X"8AB1" AFTER 4 NS, X"2AB1" AFTER 7 NS;
+	in1 <= X"2E18", X"8AB1" AFTER 1.5 NS, X"2AB1" AFTER 4 NS;
 	in2 <= "00100", "10110" AFTER 3 NS, "10111" AFTER 6 NS;
 	
 	SHiftUnit : ENTITY WORK.SHU PORT MAP 
-				(in1, in2, logicSH, arithSH, outSHU);
+					(in1, in2, logicSH, arithSH, outSHU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -523,7 +920,7 @@ ENTITY test_MDU IS
 END ENTITY test_MDU;
 ARCHITECTURE test OF test_MDU IS
 	SIGNAL clk : STD_LOGIC := '0';
-	SIGNAL rst, startMDU, arithMUL, arithDIV, ldMDU1, ldMDU2, signMDU, readyMDU : STD_LOGIC;
+	SIGNAL rst, startMDU, arithMUL, arithDIV, ldMDU1, ldMDU2, signMDU, readyMDU, DividedByZero : STD_LOGIC;
 	SIGNAL in1, in2         : STD_LOGIC_VECTOR(15 DOWNTO 0);
 	SIGNAL outMDU1, outMDU2 : STD_LOGIC_VECTOR(15 DOWNTO 0);
 BEGIN
@@ -539,8 +936,8 @@ BEGIN
 	in2 <= "0000000000000001", "0000000000000101" AFTER 3 NS, "1111111111111110" AFTER 106 NS;
 	
 	MultDivUnit : ENTITY WORK.MDU PORT MAP 
-				(clk, rst, startMDU, arithMUL, arithDIV, signMDU, ldMDU1, 
-				ldMDU2, in1, in2, outMDU1, outMDU2, readyMDU);
+					(clk, rst, startMDU, arithMUL, arithDIV, signMDU, ldMDU1, 
+					ldMDU2, in1, in2, outMDU1, outMDU2, DividedByZero, readyMDU);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -557,7 +954,7 @@ BEGIN
 	signCMP <= '0', '1' AFTER 4 NS, '0' AFTER 6 NS, '1' AFTER 9 NS;
 	
 	ComparatorUnit : ENTITY WORK.CMP PORT MAP 
-				(in1, in2, signCMP, eq, gt);
+						(in1, in2, signCMP, eq, gt);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -571,7 +968,7 @@ BEGIN
 	inINC <= X"2E18", X"8AB1" AFTER 4 NS, X"2AB1" AFTER 7 NS;
 	
 	INCrementer : ENTITY WORK.INC PORT MAP 
-				(inINC, outINC);
+					(inINC, outINC);
 END ARCHITECTURE test;
 ------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
@@ -587,5 +984,39 @@ BEGIN
 	onebartwo <= '0', '1' AFTER 3 NS, '0' AFTER 5 NS;
 	
 	COMPlementer : ENTITY WORK.COMP PORT MAP 
-				(inCOMP, onebartwo, outCOMP);
+					(inCOMP, onebartwo, outCOMP);
+END ARCHITECTURE test;
+------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+ENTITY test_ARC IS
+END ENTITY test_ARC;
+ARCHITECTURE test OF test_ARC IS
+	SIGNAL	dataBus, addrBus		: STD_LOGIC_VECTOR(15 DOWNTO 0);
+	SIGNAL	regionSize, addrPolicy	: STD_LOGIC_VECTOR(15 DOWNTO 0);
+	SIGNAL	read_en, write_en, ldIR	: STD_LOGIC;
+	SIGNAL	InstructionAccessFault	: STD_LOGIC;		
+	SIGNAL	StoreAccessFault		: STD_LOGIC;	
+	SIGNAL	LoadAccessFault			: STD_LOGIC;
+BEGIN
+	dataBus		<=	"0000000000000000", "1100101000000000" AFTER 1 NS, "1101001000000000" AFTER 1.5 NS, "1111110000000000" AFTER 3 NS;
+	addrBus		<=	"0000000000000000", "1111110000000000" AFTER 7 NS, "0000010101010101" AFTER 9 NS, "1100101000000110" AFTER 11 NS;
+	regionSize	<=	"1010100111101010";		--	10_10100_11110_10_10
+--	addrPolicy	<=	"0101101111110111";		--	0_101_101_111_110_111
+	addrPolicy	<=	"0101101011110111";		--	0_101_101_011_110_111
+	read_en		<=	'0', '1' AFTER 6 NS, '0' AFTER 8 NS, '1' AFTER 11 NS;
+	write_en	<=	'0', '1' AFTER 8 NS, '0' AFTER 10 NS;
+	ldIR		<=	'0', '1' AFTER 2 NS, '0' AFTER 4 NS;
+	
+	AddressRegionCheck:	ENTITY	WORK.ARC	
+							PORT MAP	(	dataBus, 
+											addrBus,
+											regionSize, 
+											addrPolicy,
+											read_en, 
+											write_en,
+											ldIR,
+											InstructionAccessFault,
+											StoreAccessFault,
+											LoadAccessFault	);
 END ARCHITECTURE test;

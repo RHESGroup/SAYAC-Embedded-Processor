@@ -1,48 +1,4 @@
---******************************************************************************
---  Filename:		Radix16_MUL.vhd
---  Project:		SAYAC : Simple Architecture Yet Ample Circuitry
---  Version:		0.990
---  History:
---  Date:		28 November 2021
---  Last Author: 	HANIEH
---  Copyright (C) 2021 University of Teheran
---  This source file may be used and distributed without
---  restriction provided that this copyright statement is not
---  removed from the file and that any derivative work contains
---  the original copyright notice and the associated disclaimer.
 --
-
---******************************************************************************
---	File content description:
---	Radix16 multiplier unit of the SAYAC core                                 
---******************************************************************************
-LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
-
-ENTITY Radix16_MUL IS 
-	PORT ( clk, rst, start, cout : IN STD_LOGIC ;
-		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
-		done : OUT STD_LOGIC;
-		result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );
-END Radix16_MUL;	 
-
-ARCHITECTURE behavioral_Radix16_MUL OF Radix16_MUL IS 
-	SIGNAL ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, busy_reg : STD_LOGIC;
-	SIGNAL sel_MUX : STD_LOGIC_VECTOR (3 DOWNTO 0);
-	SIGNAL op : STD_LOGIC_VECTOR (4 DOWNTO 0); 
-	SIGNAL mult_out : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0'); 
-BEGIN
-	DP : ENTITY WORK.Datapath_Radix16_MUL
-		PORT MAP (clk, rst, cout, A, B, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, sel_MUX, op, mult_out);
-	
-	CU : ENTITY WORK.Controller_Radix16_MUL
-		PORT MAP (clk, rst, start, op, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry, sel_MUX, busy_reg);
-		
-	result <= mult_out WHEN busy_reg = '0';
-	done <= NOT busy_reg;
-END behavioral_Radix16_MUL;
----------------------------------------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
@@ -50,7 +6,7 @@ USE IEEE.NUMERIC_STD.all;
 ENTITY Controller_Radix16_MUL IS 
 	PORT ( clk, rst, start : IN STD_LOGIC;
 		op : IN STD_LOGIC_VECTOR (4 DOWNTO 0);	
-		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : OUT STD_LOGIC;
+		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS : OUT STD_LOGIC;
 		sel_MUX : OUT STD_LOGIC_VECTOR (3 DOWNTO 0);
 		busy : OUT STD_LOGIC );
 END Controller_Radix16_MUL;
@@ -93,10 +49,8 @@ BEGIN
 	
 	PROCESS (p_state, op)
 	BEGIN
-		busy <= '1';
-		ld_A <= '0'; sh_A <= '0'; ld_B <= '0'; ld_P <= '0'; zero_P <= '0'; 
-		sel_AS <= '0'; sel_carry <= '0'; sel_MUX <= "0000";
-		en_cntr <= '0'; zero_cntr <= '0';
+		busy <= '1';	ld_A <= '0'; sh_A <= '0'; ld_B <= '0'; ld_P <= '0'; zero_P <= '0'; 
+		sel_AS <= '0'; sel_MUX <= "0000";	en_cntr <= '0'; zero_cntr <= '0';
 		
 		CASE ( p_state ) IS
 			WHEN IDLE =>
@@ -136,11 +90,11 @@ BEGIN
 					sel_MUX <= "0111";	
 					sel_AS <= '0';
 				END IF;
-				IF op = "01111" THEN				-- P+8B
+				IF op = "01111" THEN						-- P+8B
 					sel_MUX <= "1000";	
 					sel_AS <= '0';
 				END IF;
-				IF op = "10000" THEN				-- P-8B
+				IF op = "10000" THEN						-- P-8B
 					sel_MUX <= "1000";	
 					sel_AS <= '1';
 				END IF;
@@ -178,7 +132,6 @@ BEGIN
 				sh_A <= '1';
 			WHEN ADD =>
 				sel_MUX <= "1001";
-				sel_carry <= '1';
 				busy <= '0';
 		END CASE;
 	END PROCESS;
@@ -206,9 +159,9 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.all;
 
 ENTITY Datapath_Radix16_MUL IS 
-	PORT ( clk, rst, cout : IN STD_LOGIC;
+	PORT ( clk, rst : IN STD_LOGIC;
 		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
-		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_carry : IN STD_LOGIC;
+		ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS : IN STD_LOGIC;
 		sel_MUX : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 		op : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
 		result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );			
@@ -218,7 +171,6 @@ ARCHITECTURE behavioral_DP OF Datapath_Radix16_MUL IS
 	SIGNAL A_reg : STD_LOGIC_VECTOR (17 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL B_reg, P_reg : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL AS_out, in2_AS : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL incin2 : STD_LOGIC_VECTOR (15 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL B2, B3, B4, B5, B6, B7, B8 : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL in2_AS_sel : STD_LOGIC_VECTOR (16 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL A_reg_32 : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0');
@@ -303,19 +255,40 @@ BEGIN
 	END PROCESS;
 	
 --AddSub	
-	COMPAS : ENTITY WORK.COMP PORT MAP 
-			(in2_AS(15 DOWNTO 0), '1', incin2);
-	in2_AS_sel <= in2_AS WHEN sel_AS = '0' ELSE (incin2(15) & incin2);
-	cin1 <= cin  WHEN sel_AS = '0' ELSE '0';
+	in2_AS_sel <= in2_AS WHEN sel_AS = '0' ELSE (NOT in2_AS);
 	ADD1 : ENTITY WORK.CLA17
-		PORT MAP(P_reg, in2_AS_sel, cin1, AS_out);
-	
--- Tri_state for carry
-	cin <= cout WHEN sel_carry = '1' ELSE '0';
+		PORT MAP(P_reg, in2_AS_sel, sel_AS, AS_out);
 	
 	op <= A_reg(4 DOWNTO 0);
 	result <= AS_out(15 DOWNTO 0) & A_reg_32(16 DOWNTO 1);	
 END behavioral_DP;		 
+---------------------------------------------------------------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY Radix16_MUL IS 
+	PORT ( clk, rst, start : IN STD_LOGIC ;
+		A, B : IN STD_LOGIC_VECTOR(16 DOWNTO 0);
+		done : OUT STD_LOGIC;
+		result: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) );
+END Radix16_MUL;	 
+
+ARCHITECTURE behavioral_Radix16_MUL OF Radix16_MUL IS 
+	SIGNAL ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, busy_reg : STD_LOGIC;
+	SIGNAL sel_MUX : STD_LOGIC_VECTOR (3 DOWNTO 0);
+	SIGNAL op : STD_LOGIC_VECTOR (4 DOWNTO 0); 
+	SIGNAL mult_out : STD_LOGIC_VECTOR (31 DOWNTO 0) := (OTHERS => '0'); 
+BEGIN
+	DP : ENTITY WORK.Datapath_Radix16_MUL
+		PORT MAP (clk, rst, A, B, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_MUX, op, mult_out);
+	
+	CU : ENTITY WORK.Controller_Radix16_MUL
+		PORT MAP (clk, rst, start, op, ld_A, sh_A, ld_B, ld_P, zero_P, sel_AS, sel_MUX, busy_reg);
+		
+	result <= mult_out WHEN busy_reg = '0';
+	done <= NOT busy_reg;
+END behavioral_Radix16_MUL;
 ---------------------------------------------------------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
@@ -326,12 +299,12 @@ END Radix16_MUL_TB;
 
 ARCHITECTURE behavioral_TB OF Radix16_MUL_TB IS
 	SIGNAL clk : STD_LOGIC := '1';
-	SIGNAL rst, done, start, cout : STD_LOGIC;
+	SIGNAL rst, done, start : STD_LOGIC;
 	SIGNAL A, B : STD_LOGIC_VECTOR (16 DOWNTO 0);
 	SIGNAL result_Radix16_MUL : STD_LOGIC_VECTOR (31 DOWNTO 0);
 BEGIN
 	MUT : ENTITY WORK.Radix16_MUL 
-		PORT MAP (clk, rst, start, cout, A, B, done, result_Radix16_MUL);
+		PORT MAP (clk, rst, start, A, B, done, result_Radix16_MUL);
 	
 	clk <= NOT clk AFTER 2.5 NS WHEN NOW <= 300 NS ELSE '0';
 	
@@ -339,7 +312,6 @@ BEGIN
 	BEGIN
 		rst <= '1', '0' AFTER 6 NS;
 		start <= '0';
-		cout <= '0';
 		
 		A <= "00000000000000000"; 		-- A = 0
 		B <= "00000000000000000";		-- B = 0
