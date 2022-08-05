@@ -1,0 +1,36 @@
+hierarchy -check -auto-top
+synth; opt -full
+flatten
+
+# placeholder for dfflibmap
+# dfflibmap -liberty mycells.lib
+
+opt
+
+# placeholder for abc
+# abc -liberty mycells.lib 
+
+opt
+hilomap -hicell TIEHIM Y -locell TIELOM Y
+iopadmap -bits -inpad IBUF O:I -outpad OBUF I:O
+splitnets
+opt
+clean -purge
+
+# placeholder for premap_synthesis file
+# write_verilog -noattr synth_premap.v
+# write_blif synth_premap.blif
+# write_json synth_premap.v
+
+# placeholder techmap
+# techmap -map DFF_map.v
+# techmap -map Logic_map.v
+
+opt
+clean -purge
+opt_clean
+stat
+
+# placeholder for postmap_synthesis file
+# write_verilog -noattr synth_postmap.v
+# write_json -noattr synth_postmap.v

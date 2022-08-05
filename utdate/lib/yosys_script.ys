@@ -1,0 +1,49 @@
+read_verilog /Users/ebinouri/Documents/UNi/NBGen/counter.v 
+hierarchy -check -auto-top
+synth; opt -full
+flatten
+
+# placeholder for dfflibmap
+dfflibmap -liberty /Users/ebinouri/Documents/UNi/NBGen/lib/mycells_yosys.lib 
+
+# dfflibmap -liberty mycells.lib
+
+opt
+
+# placeholder for abc
+abc -liberty /Users/ebinouri/Documents/UNi/NBGen/lib/mycells_yosys.lib 
+
+# abc -liberty mycells.lib 
+
+opt
+hilomap -hicell TIEHIM Y -locell TIELOM Y
+iopadmap -bits -inpad IBUF O:I -outpad OBUF I:O
+splitnets
+opt
+clean -purge
+
+# placeholder for premap_synthesis file
+write_verilog -noattr /Users/ebinouri/Documents/UNi/NBGen/synthesis/synth_premap.v 
+write_blif /Users/ebinouri/Documents/UNi/NBGen/synthesis/synth_premap.blif 
+# write_verilog -noattr synth_premap.v
+# write_blif synth_premap.blif
+
+# placeholder techmap
+techmap -map /Users/ebinouri/Documents/UNi/NBGen/lib/DFF_map.v 
+abc -liberty /Users/ebinouri/Documents/UNi/NBGen/lib/mycells_yosys.lib 
+opt; splitnets; opt; clean -purge
+techmap -map /Users/ebinouri/Documents/UNi/NBGen/lib/Logic_map.v 
+
+# techmap -map DFF_map.v
+# techmap -map Logic_map.v
+
+opt
+clean -purge
+opt_clean
+stat
+
+# placeholder for postmap_synthesis file
+write_verilog -noattr /Users/ebinouri/Documents/UNi/NBGen/synthesis/synth_postmap.v 
+write_json /Users/ebinouri/Documents/UNi/NBGen/synthesis/synth_postmap.json 
+
+# write_verilog -noattr synth_premap.v

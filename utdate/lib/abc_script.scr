@@ -1,0 +1,3 @@
+read /Users/ebinouri/Documents/UNi/netListGen/python_wrapper/lib/mycells_abc.lib 
+read -m /Users/ebinouri/Documents/UNi/netListGen/python_wrapper/bench/synth_dffport_rm.v 
+write_bench /Users/ebinouri/Documents/UNi/netListGen/python_wrapper/bench/abc_bench.bench 

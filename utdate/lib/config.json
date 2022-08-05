@@ -1,0 +1,31 @@
+{
+    "yosys_bin": "/Users/ebinouri/Documents/UNi/OpenSourceTools/fpga-toolchain/bin/yosys",
+    "yosys_script_fileName": "scripts.ys",
+    "yosys_script_premap_v_outputName": "synth_premap.v",
+    "yosys_script_premap_blif_outputName": "synth_premap.blif",
+    "yosys_script_premap_json_outputName": "synth_premap.json",
+    "yosys_script_postmap_v_outputName": "synth_postmap.v",
+    "yosys_script_postmap_json_outputName": "synth_postmap.json",
+    "mycells_yosys_lib_fileName": "mycells_yosys.lib",
+    
+    "Logic_map_fileName": "Logic_map.v",
+    "DFF_map_fileName": "DFF_map.v",
+    
+    "abc_bin": "abc",
+    "abc_script_fileName": "abc_script.scr",
+    "abc_v_inputName": "synth_dffport_rm.v",
+    "mycells_abc_lib_fileName": "mycells_abc.lib",
+    "abc_bench_output": "abc_bench.bench",
+    "abc_bench_rm_floated_net_output": "abc_bench_rm_floated_net.bench",
+    
+    "vhdl_netlist_fileName": "vhdl_netlist.vhd",
+    "verilog_netlist_fileName": "verilog_netlist.v",
+    "systemC_netlist_fileName": "systemC_netlist.h",
+    "systemC_testbench_fileName": "testbench.h",
+    "systemC_faultable_netlist_fileName": "systemC_faultable_netlist.h",
+    
+    "fault_list_fileName": "fault_list.flt",
+    
+    "atalanta_bin": "atalanta",
+    "atalanta_output_fileName": "atalanta_output.log"
+}
