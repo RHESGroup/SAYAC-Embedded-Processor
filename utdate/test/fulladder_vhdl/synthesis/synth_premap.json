@@ -1,0 +1,411 @@
+{
+  "creator": "Yosys 0.10+12 (open-tool-forge build) (git sha1 356ec7bb, clang 11.0.3 )",
+  "modules": {
+    "fulladder": {
+      "attributes": {
+        "top": "00000000000000000000000000000001"
+      },
+      "ports": {
+        "i0": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "i1": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "ci": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "s": {
+          "direction": "output",
+          "bits": [ 5 ]
+        },
+        "co": {
+          "direction": "output",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$abc$96$auto$blifparse.cc:381:parse_blif$100": {
+          "hide_name": 1,
+          "type": "NOR",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 7 ],
+            "B": [ 8 ],
+            "Y": [ 9 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$101": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 10 ],
+            "B": [ 11 ],
+            "Y": [ 12 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$102": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 7 ],
+            "B": [ 8 ],
+            "Y": [ 13 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$103": {
+          "hide_name": 1,
+          "type": "NOT",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 13 ],
+            "Y": [ 14 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$104": {
+          "hide_name": 1,
+          "type": "NOR",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 9 ],
+            "B": [ 14 ],
+            "Y": [ 15 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$105": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 12 ],
+            "B": [ 13 ],
+            "Y": [ 16 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$106": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 17 ],
+            "B": [ 16 ],
+            "Y": [ 18 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$107": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 19 ],
+            "B": [ 15 ],
+            "Y": [ 20 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$108": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 18 ],
+            "B": [ 20 ],
+            "Y": [ 21 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$109": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 17 ],
+            "B": [ 12 ],
+            "Y": [ 22 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$110": {
+          "hide_name": 1,
+          "type": "NAND",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 13 ],
+            "B": [ 22 ],
+            "Y": [ 23 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$97": {
+          "hide_name": 1,
+          "type": "NOT",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 7 ],
+            "Y": [ 10 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$98": {
+          "hide_name": 1,
+          "type": "NOT",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 17 ],
+            "Y": [ 19 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$99": {
+          "hide_name": 1,
+          "type": "NOT",
+          "parameters": {
+          },
+          "attributes": {
+          },
+          "connections": {
+            "A": [ 8 ],
+            "Y": [ 11 ]
+          }
+        },
+        "$iopadmap$fulladder.ci": {
+          "hide_name": 1,
+          "type": "IBUF",
+          "parameters": {
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001"
+          },
+          "connections": {
+            "I": [ 4 ],
+            "O": [ 8 ]
+          }
+        },
+        "$iopadmap$fulladder.co": {
+          "hide_name": 1,
+          "type": "OBUF",
+          "parameters": {
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001"
+          },
+          "connections": {
+            "I": [ 23 ],
+            "O": [ 6 ]
+          }
+        },
+        "$iopadmap$fulladder.i0": {
+          "hide_name": 1,
+          "type": "IBUF",
+          "parameters": {
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001"
+          },
+          "connections": {
+            "I": [ 2 ],
+            "O": [ 17 ]
+          }
+        },
+        "$iopadmap$fulladder.i1": {
+          "hide_name": 1,
+          "type": "IBUF",
+          "parameters": {
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001"
+          },
+          "connections": {
+            "I": [ 3 ],
+            "O": [ 7 ]
+          }
+        },
+        "$iopadmap$fulladder.s": {
+          "hide_name": 1,
+          "type": "OBUF",
+          "parameters": {
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001"
+          },
+          "connections": {
+            "I": [ 21 ],
+            "O": [ 5 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$96$new_n10_": {
+          "hide_name": 1,
+          "bits": [ 12 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n11_": {
+          "hide_name": 1,
+          "bits": [ 13 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n12_": {
+          "hide_name": 1,
+          "bits": [ 14 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n13_": {
+          "hide_name": 1,
+          "bits": [ 15 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n14_": {
+          "hide_name": 1,
+          "bits": [ 16 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n15_": {
+          "hide_name": 1,
+          "bits": [ 18 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n16_": {
+          "hide_name": 1,
+          "bits": [ 20 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n18_": {
+          "hide_name": 1,
+          "bits": [ 22 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n6_": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n7_": {
+          "hide_name": 1,
+          "bits": [ 19 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n8_": {
+          "hide_name": 1,
+          "bits": [ 11 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n9_": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$ci": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$co": {
+          "hide_name": 1,
+          "bits": [ 23 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$i0": {
+          "hide_name": 1,
+          "bits": [ 17 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$i1": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$s": {
+          "hide_name": 1,
+          "bits": [ 21 ],
+          "attributes": {
+          }
+        },
+        "ci": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+          }
+        },
+        "co": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+          }
+        },
+        "i0": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+          }
+        },
+        "i1": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+          }
+        },
+        "s": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  }
+}

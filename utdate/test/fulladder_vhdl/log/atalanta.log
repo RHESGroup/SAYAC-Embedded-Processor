@@ -1,0 +1,43 @@
+	*******************************************************
+	*                                                     *
+	*          Welcome to atalanta (version 2.0)          *
+	*                                                     *
+	*               Dong S. Ha (ha@vt.edu)                *
+	*            Web: http://www.ee.vt.edu/ha             *
+	*  Virginia Polytechnic Institute & State University  *
+	*                                                     *
+	*******************************************************
+
+******   SUMMARY OF TEST PATTERN GENERATION RESULTS   ******
+1. Circuit structure
+   Name of the circuit                       : Benchmark_"fulladder"_written_by_ABC_on_Thu_Aug__4_17:14:58_2022
+   Number of primary inputs                  : 3
+   Number of primary outputs                 : 2
+   Number of gates                           : 19
+   Level of the circuit                      : 7
+
+2. ATPG parameters
+   Test pattern generation Mode              : RPT + DTPG + TC
+   Limit of random patterns (packets)        : 16
+   Backtrack limit                           : 10
+   Initial random number generator seed      : 1659617099
+   Test pattern compaction Mode              : REVERSE + SHUFFLE 
+   Limit of shuffling compaction             : 2
+   Number of shuffles                        : 4
+
+3. Test pattern generation results
+   Number of test patterns before compaction : 8
+   Number of test patterns after compaction  : 8
+   Fault coverage                            : 100.000 %
+   Number of collapsed faults                : 34
+   Number of identified redundant faults     : 0
+   Number of aborted faults                  : 0
+   Total number of backtrackings             : 0
+
+4. Memory used                               : 0.000 MB
+
+5. CPU time
+   Initialization                            : 0.000 Secs
+   Fault simulation                          : 0.000 Secs
+   FAN                                       : 0.000 Secs
+   Total                                     : 0.000 Secs

@@ -1,0 +1,482 @@
+{
+  "creator": "Yosys 0.10+12 (open-tool-forge build) (git sha1 356ec7bb, clang 11.0.3 )",
+  "modules": {
+    "fulladder": {
+      "attributes": {
+        "top": "00000000000000000000000000000001"
+      },
+      "ports": {
+        "i0": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "i1": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "ci": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "s": {
+          "direction": "output",
+          "bits": [ 5 ]
+        },
+        "co": {
+          "direction": "output",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$abc$96$auto$blifparse.cc:381:parse_blif$100": {
+          "hide_name": 1,
+          "type": "nor_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:93.38-96.4"
+          },
+          "connections": {
+            "in1": [ 7, 8 ],
+            "out1": [ 9 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$101": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 10, 11 ],
+            "out1": [ 12 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$102": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 7, 8 ],
+            "out1": [ 13 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$103": {
+          "hide_name": 1,
+          "type": "notg",
+          "parameters": {
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:53.31-56.4"
+          },
+          "connections": {
+            "in1": [ 13 ],
+            "out1": [ 14 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$104": {
+          "hide_name": 1,
+          "type": "nor_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:93.38-96.4"
+          },
+          "connections": {
+            "in1": [ 14, 9 ],
+            "out1": [ 15 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$105": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 13, 12 ],
+            "out1": [ 16 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$106": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 16, 17 ],
+            "out1": [ 18 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$107": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 15, 19 ],
+            "out1": [ 20 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$108": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 20, 18 ],
+            "out1": [ 21 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$109": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 12, 17 ],
+            "out1": [ 22 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$110": {
+          "hide_name": 1,
+          "type": "nand_n",
+          "parameters": {
+            "n": "00000000000000000000000000000010",
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:73.39-76.4"
+          },
+          "connections": {
+            "in1": [ 22, 13 ],
+            "out1": [ 23 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$97": {
+          "hide_name": 1,
+          "type": "notg",
+          "parameters": {
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:53.31-56.4"
+          },
+          "connections": {
+            "in1": [ 8 ],
+            "out1": [ 11 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$98": {
+          "hide_name": 1,
+          "type": "notg",
+          "parameters": {
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:53.31-56.4"
+          },
+          "connections": {
+            "in1": [ 17 ],
+            "out1": [ 19 ]
+          }
+        },
+        "$abc$96$auto$blifparse.cc:381:parse_blif$99": {
+          "hide_name": 1,
+          "type": "notg",
+          "parameters": {
+            "tphl": "00000000000000000000000000000000",
+            "tplh": "00000000000000000000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:53.31-56.4"
+          },
+          "connections": {
+            "in1": [ 7 ],
+            "out1": [ 10 ]
+          }
+        },
+        "$iopadmap$fulladder.ci": {
+          "hide_name": 1,
+          "type": "pin",
+          "parameters": {
+            "n": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:33.17-36.4"
+          },
+          "connections": {
+            "in1": [ 4 ],
+            "out1": [ 7 ]
+          }
+        },
+        "$iopadmap$fulladder.co": {
+          "hide_name": 1,
+          "type": "pout",
+          "parameters": {
+            "n": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:43.18-46.4"
+          },
+          "connections": {
+            "in1": [ 23 ],
+            "out1": [ 6 ]
+          }
+        },
+        "$iopadmap$fulladder.i0": {
+          "hide_name": 1,
+          "type": "pin",
+          "parameters": {
+            "n": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:33.17-36.4"
+          },
+          "connections": {
+            "in1": [ 2 ],
+            "out1": [ 17 ]
+          }
+        },
+        "$iopadmap$fulladder.i1": {
+          "hide_name": 1,
+          "type": "pin",
+          "parameters": {
+            "n": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:33.17-36.4"
+          },
+          "connections": {
+            "in1": [ 3 ],
+            "out1": [ 8 ]
+          }
+        },
+        "$iopadmap$fulladder.s": {
+          "hide_name": 1,
+          "type": "pout",
+          "parameters": {
+            "n": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "keep": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/Logic_map.v:43.18-46.4"
+          },
+          "connections": {
+            "in1": [ 21 ],
+            "out1": [ 5 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$96$new_n10_": {
+          "hide_name": 1,
+          "bits": [ 12 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n11_": {
+          "hide_name": 1,
+          "bits": [ 13 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n12_": {
+          "hide_name": 1,
+          "bits": [ 14 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n13_": {
+          "hide_name": 1,
+          "bits": [ 15 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n14_": {
+          "hide_name": 1,
+          "bits": [ 16 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n15_": {
+          "hide_name": 1,
+          "bits": [ 18 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n16_": {
+          "hide_name": 1,
+          "bits": [ 20 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n18_": {
+          "hide_name": 1,
+          "bits": [ 22 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n6_": {
+          "hide_name": 1,
+          "bits": [ 11 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n7_": {
+          "hide_name": 1,
+          "bits": [ 19 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n8_": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+          }
+        },
+        "$abc$96$new_n9_": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$ci": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$co": {
+          "hide_name": 1,
+          "bits": [ 23 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$i0": {
+          "hide_name": 1,
+          "bits": [ 17 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$i1": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+          }
+        },
+        "$iopadmap$s": {
+          "hide_name": 1,
+          "bits": [ 21 ],
+          "attributes": {
+          }
+        },
+        "ci": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+          }
+        },
+        "co": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+          }
+        },
+        "i0": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+          }
+        },
+        "i1": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+          }
+        },
+        "s": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  }
+}

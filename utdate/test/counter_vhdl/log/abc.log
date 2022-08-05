@@ -1,0 +1,12 @@
+UC Berkeley, ABC 1.01 (compiled Dec  1 2021 11:18:53)
+abc - > read /Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/mycells_abc.lib 
+Warning: Templates are not defined.
+Libery parser cannot read "time_unit".  Assuming   time_unit : "1ns".
+Libery parser cannot read "capacitive_load_unit". Assuming   capacitive_load_unit(1, pf).
+Library "demo" from "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/utdate/lib/mycells_abc.lib" has 6 cells (10 skipped: 10 seq; 0 tri-state; 0 no func; 0 dont_use).  Time =     0.00 sec
+abc - > read -m /Users/ebinouri/Documents/UNi/NBGen/pypi_package/test/counter_vhdl/test/synth_dffport_rm.v 
+Warning: The design contains 1 undefined object types interpreted as blackboxes:
+DFF_PP0 (4)  
+Hierarchy reader converted 4 instances of blackboxes.
+abc - > write_bench /Users/ebinouri/Documents/UNi/NBGen/pypi_package/test/counter_vhdl/test/abc_bench.bench 
+***EOF***

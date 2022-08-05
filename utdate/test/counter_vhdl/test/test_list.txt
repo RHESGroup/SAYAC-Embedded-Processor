@@ -1,0 +1,17 @@
+* Name of circuit:  abc_bench_rm_floated_net.bench
+* Primary inputs :
+  counter_reg[0] counter_reg[1] counter_reg[2] counter_reg[3] en 
+  
+* Primary outputs:
+  co counter[0] counter[1] counter[2] counter[3] 
+  _00_ _01_ _02_ _03_ 
+
+* Test patterns and fault free responses:
+
+   1: 11111 111110000
+   2: 11101 011100001
+   3: 10001 010000100
+   4: 11010 011011101
+   5: 01110 001110111
+   6: 11001 011000010
+   7: 00001 000001000

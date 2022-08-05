@@ -1,0 +1,2919 @@
+++ Registered Module: testbench.fulladder_golden.nor_n_0
+++ Registered Module: testbench.fulladder_golden.nand_n_1
+++ Registered Module: testbench.fulladder_golden.nand_n_2
+++ Registered Module: testbench.fulladder_golden.notg_3
+++ Registered Module: testbench.fulladder_golden.nor_n_4
+++ Registered Module: testbench.fulladder_golden.nand_n_5
+++ Registered Module: testbench.fulladder_golden.nand_n_6
+++ Registered Module: testbench.fulladder_golden.nand_n_7
+++ Registered Module: testbench.fulladder_golden.nand_n_8
+++ Registered Module: testbench.fulladder_golden.nand_n_9
+++ Registered Module: testbench.fulladder_golden.nand_n_10
+++ Registered Module: testbench.fulladder_golden.notg_11
+++ Registered Module: testbench.fulladder_golden.notg_12
+++ Registered Module: testbench.fulladder_golden.notg_13
+++ Registered Module: testbench.fulladder_golden.pin_14
+++ Registered Module: testbench.fulladder_golden.pout_15
+++ Registered Module: testbench.fulladder_golden.pin_16
+++ Registered Module: testbench.fulladder_golden.pin_17
+++ Registered Module: testbench.fulladder_golden.pout_18
+++ Registered Module: testbench.fut.nor_n_0
+++ Registered Module: testbench.fut.nand_n_1
+++ Registered Module: testbench.fut.nand_n_2
+++ Registered Module: testbench.fut.notg_3
+++ Registered Module: testbench.fut.nor_n_4
+++ Registered Module: testbench.fut.nand_n_5
+++ Registered Module: testbench.fut.nand_n_6
+++ Registered Module: testbench.fut.nand_n_7
+++ Registered Module: testbench.fut.nand_n_8
+++ Registered Module: testbench.fut.nand_n_9
+++ Registered Module: testbench.fut.nand_n_10
+++ Registered Module: testbench.fut.notg_11
+++ Registered Module: testbench.fut.notg_12
+++ Registered Module: testbench.fut.notg_13
+++ Registered Module: testbench.fut.pin_14
+++ Registered Module: testbench.fut.pout_15
+++ Registered Module: testbench.fut.pin_16
+++ Registered Module: testbench.fut.pin_17
+++ Registered Module: testbench.fut.pout_18
+* Initially Disable all faults 
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(0)
+faultType | 0
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(1)
+faultType | 0
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(0)
+faultType | 0
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(1)
+faultType | 0
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(0)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(1)
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 0
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 1
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 0
+
+Registered fault objects
+Total number of faultable objects: 116
++++----+++----+++----+++----+++
+Faulty object: #0
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_0
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #1
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_0
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #2
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_0
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #3
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_0
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #4
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_1
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #5
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_1
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #6
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_1
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #7
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_1
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #8
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_2
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #9
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_2
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #10
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_2
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #11
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_2
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #12
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_3
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #13
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_3
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #14
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_4
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #15
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_4
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #16
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_4
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #17
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nor_n_4
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #18
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_5
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #19
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_5
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #20
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_5
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #21
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_5
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #22
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_6
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #23
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_6
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #24
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_6
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #25
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_6
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #26
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_7
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #27
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_7
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #28
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_7
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #29
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_7
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #30
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_8
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #31
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_8
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #32
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_8
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #33
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_8
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #34
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_9
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #35
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_9
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #36
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_9
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #37
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_9
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #38
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_10
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #39
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_10
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #40
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_10
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #41
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | nand_n_10
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #42
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_11
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #43
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_11
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #44
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_12
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #45
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_12
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #46
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_13
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #47
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | notg_13
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #48
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_14
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #49
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_14
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #50
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pout_15
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #51
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pout_15
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #52
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_16
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #53
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_16
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #54
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_17
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #55
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pin_17
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #56
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pout_18
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #57
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fulladder_golden
+moduleId       | pout_18
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #58
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_0
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #59
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_0
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #60
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_0
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #61
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_0
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #62
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_1
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #63
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_1
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #64
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_1
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #65
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_1
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #66
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_2
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #67
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_2
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #68
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_2
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #69
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_2
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #70
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_3
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #71
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_3
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #72
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_4
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #73
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_4
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #74
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_4
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #75
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nor_n_4
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #76
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_5
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #77
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_5
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #78
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_5
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #79
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_5
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #80
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_6
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #81
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_6
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #82
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_6
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #83
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_6
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #84
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_7
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #85
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_7
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #86
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_7
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #87
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_7
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #88
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_8
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #89
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_8
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #90
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_8
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #91
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_8
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #92
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_9
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #93
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_9
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #94
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_9
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #95
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_9
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #96
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_10
+objId          | in1(0)
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #97
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_10
+objId          | in1(0)
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #98
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_10
+objId          | in1(1)
+faultId        | 3
+type           | 0
+enable         | 0
+
+Faulty object: #99
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | nand_n_10
+objId          | in1(1)
+faultId        | 4
+type           | 1
+enable         | 0
+
+Faulty object: #100
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_11
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #101
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_11
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #102
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_12
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #103
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_12
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #104
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_13
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #105
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | notg_13
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #106
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_14
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #107
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_14
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #108
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pout_15
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #109
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pout_15
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #110
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_16
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #111
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_16
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #112
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_17
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #113
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pin_17
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+Faulty object: #114
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pout_18
+objId          | in1
+faultId        | 1
+type           | 0
+enable         | 0
+
+Faulty object: #115
+-------------------------------
+getTestbenchId | testbench
+getDesignId    | fut
+moduleId       | pout_18
+objId          | in1
+faultId        | 2
+type           | 1
+enable         | 0
+
+-----------------------------
+--------- Inject Fault:--------------------- NUMBER:1
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(0)
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.nor_n_0
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nor_n_0 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 0 s
+fault on testbench.fut.nor_n_0 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 0 s
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nor_n_0 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 2 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nor_n_0 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 4 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+fault on testbench.fut.nor_n_0 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 6 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(0)
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:1
+
+--------- Inject Fault:--------------------- NUMBER:2
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(1)
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.nor_n_0
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nor_n_0 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 8 ns
+fault on testbench.fut.nor_n_0 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 8 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nor_n_0 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 10 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nor_n_0 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 12 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_0
+obj       | in1(1)
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:2
+
+--------- Inject Fault:--------------------- NUMBER:3
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_1
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 14 ns
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 14 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 16 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 18 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 20 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 22 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_1 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 24 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    1   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:3
+
+--------- Inject Fault:--------------------- NUMBER:4
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_1
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 26 ns
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 26 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 28 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 30 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 32 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 34 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 36 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 011
+
+fault on testbench.fut.nand_n_1 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 38 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    1   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_1
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:4
+
+--------- Inject Fault:--------------------- NUMBER:5
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_2
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_2 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 40 ns
+fault on testbench.fut.nand_n_2 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 40 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_2 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 42 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_2 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 44 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:5
+
+--------- Inject Fault:--------------------- NUMBER:6
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_2
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_2 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 46 ns
+fault on testbench.fut.nand_n_2 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 46 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_2 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 48 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_2 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 50 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+fault on testbench.fut.nand_n_2 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 52 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_2
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:6
+
+--------- Inject Fault:--------------------- NUMBER:7
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(0)
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.nor_n_4
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 54 ns
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 54 ns
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 54 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 56 ns
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 56 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 58 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 62 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 64 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 011
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 110
+
+fault on testbench.fut.nor_n_4 in1[0] = 0 --- fault on in1[1] = 3 --- Time: 68 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(0)
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:7
+
+--------- Inject Fault:--------------------- NUMBER:8
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(1)
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.nor_n_4
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nor_n_4 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 70 ns
+fault on testbench.fut.nor_n_4 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 70 ns
+fault on testbench.fut.nor_n_4 in1[0] = 3 --- fault on in1[1] = 0 --- Time: 70 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nor_n_4
+obj       | in1(1)
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:8
+
+--------- Inject Fault:--------------------- NUMBER:9
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_5
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_5 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 72 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_5 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 74 ns
+fault on testbench.fut.nand_n_5 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 74 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:9
+
+--------- Inject Fault:--------------------- NUMBER:10
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_5
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 76 ns
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 76 ns
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 76 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 78 ns
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 78 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 80 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_5 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 84 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_5
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:10
+
+--------- Inject Fault:--------------------- NUMBER:11
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_6
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 86 ns
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 86 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 88 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 90 ns
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 90 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 94 ns
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 94 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_6 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 96 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:11
+
+--------- Inject Fault:--------------------- NUMBER:12
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_6
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_6 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 98 ns
+fault on testbench.fut.nand_n_6 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 98 ns
+fault on testbench.fut.nand_n_6 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 98 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_6
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:12
+
+--------- Inject Fault:--------------------- NUMBER:13
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_7
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_7 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 100 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:13
+
+--------- Inject Fault:--------------------- NUMBER:14
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_7
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 102 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 104 ns
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 104 ns
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 104 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 106 ns
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 106 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 110 ns
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 110 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_7 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 112 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_7
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:14
+
+--------- Inject Fault:--------------------- NUMBER:15
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_8
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 114 ns
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 114 ns
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 114 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 116 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 118 ns
+fault on testbench.fut.nand_n_8 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 118 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:15
+
+--------- Inject Fault:--------------------- NUMBER:16
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_8
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_8 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 120 ns
+fault on testbench.fut.nand_n_8 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 120 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_8 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 122 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_8
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:16
+
+--------- Inject Fault:--------------------- NUMBER:17
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_9
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 124 ns
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 124 ns
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 124 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 126 ns
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 126 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 128 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 132 ns
+fault on testbench.fut.nand_n_9 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 132 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:17
+
+--------- Inject Fault:--------------------- NUMBER:18
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_9
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_9 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 134 ns
+fault on testbench.fut.nand_n_9 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 134 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_9 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 136 ns
+fault on testbench.fut.nand_n_9 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 136 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_9 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 138 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_9
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:18
+
+--------- Inject Fault:--------------------- NUMBER:19
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(0)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_10
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 140 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 142 ns
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 142 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 144 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 148 ns
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 148 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_10 in1[0] = 1 --- fault on in1[1] = 3 --- Time: 150 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(0)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:19
+
+--------- Inject Fault:--------------------- NUMBER:20
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(1)
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.nand_n_10
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 152 ns
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 152 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 154 ns
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 154 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 010
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 156 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 100
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 001
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 160 ns
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 160 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 101
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 162 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 011
+
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    1
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 110
+
+fault on testbench.fut.nand_n_10 in1[0] = 3 --- fault on in1[1] = 1 --- Time: 166 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    1   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | nand_n_10
+obj       | in1(1)
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:20
+
+--------- Inject Fault:--------------------- NUMBER:21
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.pout_15
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.pout_15 in1 = 1 --- Time: 168 ns
+fault on testbench.fut.pout_15 in1 = 1 --- Time: 168 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:21
+
+--------- Inject Fault:--------------------- NUMBER:22
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.pout_15
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.pout_15 in1 = 0 --- Time: 170 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.pout_15 in1 = 0 --- Time: 172 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    1
+    1   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_15
+obj       | in1
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:22
+
+--------- Inject Fault:--------------------- NUMBER:23
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 1
+## enable faultInjected signal on module:: testbench.fut.pout_18
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.pout_18 in1 = 1 --- Time: 174 ns
+fault on testbench.fut.pout_18 in1 = 1 --- Time: 174 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    1
+    0   |    0
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 1
+--------- Remove Fault:--------------------- NUMBER:23
+
+--------- Inject Fault:--------------------- NUMBER:24
+Fault to be Injected: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 0
+## enable faultInjected signal on module:: testbench.fut.pout_18
+
+---+++---+++---+++---+++
+Apply Test Vector: 000
+
+fault on testbench.fut.pout_18 in1 = 0 --- Time: 176 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    0   |    0
+    0   |    0
+
+
+---+++---+++---+++---+++
+Apply Test Vector: 111
+
+fault on testbench.fut.pout_18 in1 = 0 --- Time: 178 ns
+++ Simulation result 
+ gold vs faulty 
+ -------------- 
+        |       
+    1   |    0
+    1   |    1
+
+******* Fault has been detected ********
+
+Fault to be removed: 
+----------|-------------- 
+testbench | testbench
+dut       | fut
+module    | pout_18
+obj       | in1
+faultType | 0
+--------- Remove Fault:--------------------- NUMBER:24
+
++ End of faultInjection::---------------------------  
