@@ -5,7 +5,8 @@
 ## MinimalSystem Example
 Mnimal system is an example of SAYAC system that contains a processor, a memory, and a keyboard as a peripheral. The example is an embedded system that contains a processor, a memory, and a keyboard as a peripheral. 
 
-![sui](https://user-images.githubusercontent.com/82899079/183257253-7d58b119-67ec-479e-9fe0-11bf7e99b0a0.jpg)
+![sui](https://user-images.githubusercontent.com/82899079/183258843-56d3d156-0e38-4c5f-b837-cdd35c84122d.jpg)
+
 
 ## Example Program
 The application program that is being run on this SAYAC system, is a hardware security program.
