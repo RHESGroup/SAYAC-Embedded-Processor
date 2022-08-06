@@ -14,13 +14,13 @@ The executable harness file is provided to the users in addition to the source f
 ### 1. Go to the directory including the example
 ```
 CD $SourceDirectory/SUI/Examples/minimalSystem
-
+```
 ### 2. Invoke the SUI environment
 ```
 >./SAYACsystem
-
+```
 After running this command argument, the user enters the SUI simulation environment:
 ```
 Welcome to SAYAC system user interface
 SUI>> Please enter your command
-
+```
