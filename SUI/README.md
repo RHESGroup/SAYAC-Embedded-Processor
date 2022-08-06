@@ -11,11 +11,11 @@ Mnimal system is an example of SAYAC system that contains a processor, a memory,
 ## How to run 
 The executable harness file is provided to the users in addition to the source files that are needed for a system simulation. To run the example system you need to first invoke the SUI environment:
 
-### 1. Go to the directory including the example
+### 1. Go to the directory including the example:
 ```
 CD $SourceDirectory/SUI/Examples/minimalSystem
 ```
-### 2. Invoke the SUI environment
+### 2. Invoke the SUI environment:
 ```
 >./SAYACsystem
 ```
@@ -24,3 +24,45 @@ After running this command argument, the user enters the SUI simulation environm
 Welcome to SAYAC system user interface
 SUI>> Please enter your command
 ```
+### 3. You can enable debugging mode:
+```
+SUI>> Please enter your command -dbg -hlp
+SUI>> dbg>> hlp>> for debugging purpose:
+
+	-dbg -on : entering the debugging mode
+	-dbg -off: exiting the debugging mode
+
+```
+### 4. Run the simulation:
+```
+SUI>> Please enter your command -dbg -hlp
+SUI>> dbg>> on>> You entered the Debugging mode
+*********************************************
+SUI>> Please enter your command -run
+SUI>> run>> Running…
+Init pow is done
+Starting location: 0
+
+Info: (I702) default timescale unit for tracing : 1 ps (system_Main.vcd)
+**********MSI Instruction************
+[adr] 5
+Regfile Write Data Is:  1111111110000000
+		######################Program Begins ####################
+
+Power is: 6
+Time is:  5 ns
+
+**********Ldr Instruction************
+
+
+		**********************Guessed Password ******************
+		Enter two character of the password Time is 20ns
+
+fr
+[adr]	1
+Regfile Write Data Is:  0110011001110010
+Power is: 31
+Time is:  25 ns
+
+```
+
