@@ -7,6 +7,23 @@ Mnimal system is an example of SAYAC system that contains a processor, a memory,
 
 ![sui](https://user-images.githubusercontent.com/82899079/183257253-7d58b119-67ec-479e-9fe0-11bf7e99b0a0.jpg)
 
+## Example Program
+The application program that is being run on this SAYAC system, is a hardware security program.
+In some specific APPs, in order to access the provided services, a user has to first grant access, providing a correct predefined password. 
+ * Passwords must be 8 characters long;
+ * APP performs the password correctness checking exploiting a custom co-processor, named SHADOW;
+ * SHADOW is implemented resorting to the SAYAC processor;
+ * APP and SHADOW interact via a shared memory called Mem, and specifically:
+ * To request a new password check, APP has to:
+
+    * store the 16 lower bits of the password into Mem(0x0F00),
+    * store the 16 higher bits of the password into Mem(0x0F01),
+    * store the value x000F into Mem(0x0F02);
+    * at the completion of its check, SHADOW stores into Mem(0x0F10):
+     * the value x0000 if the check failed,
+     * the value x000F if the check passed;
+
+In addition, the designers of SHADOW erroneously used a debug-oriented version of the processor SAYAC. In such a version, 2 general purpose registers (namely, R3 and R4) are used to store, at the completion of each Von-Neumann cycle, the number of clock cycles elapsed from the beginning of the current password checking, and the estimated power consumption from the beginning of the current password checking, respectively.
 
 ## How to run 
 The executable harness file is provided to the users in addition to the source files that are needed for a system simulation. To run the example system you need to first invoke the SUI environment:
@@ -40,29 +57,6 @@ SUI>> dbg>> on>> You entered the Debugging mode
 *********************************************
 SUI>> Please enter your command -run
 SUI>> run>> Running…
-Init pow is done
-Starting location: 0
-
-Info: (I702) default timescale unit for tracing : 1 ps (system_Main.vcd)
-**********MSI Instruction************
-[adr] 5
-Regfile Write Data Is:  1111111110000000
-		######################Program Begins ####################
-
-Power is: 6
-Time is:  5 ns
-
-**********Ldr Instruction************
-
-
-		**********************Guessed Password ******************
-		Enter two character of the password Time is 20ns
-
-fr
-[adr]	1
-Regfile Write Data Is:  0110011001110010
-Power is: 31
-Time is:  25 ns
 
 ```
 
