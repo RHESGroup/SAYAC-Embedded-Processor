@@ -6,3 +6,11 @@
 Mnimal system is an example of SAYAC system that contains a processor, a memory, and a keyboard as a peripheral. The example is an embedded system that contains a processor, a memory, and a keyboard as a peripheral. 
 
 ![sui](https://user-images.githubusercontent.com/82899079/183257253-7d58b119-67ec-479e-9fe0-11bf7e99b0a0.jpg)
+
+
+## How to run 
+The executable harness file is provided to the users in addition to the source files that are needed for a system simulation. To run the example system you need to first invoke the SUI environment:
+
+### 1. Invoking the SUI
+```
+CD $SourceDirectory/SUI/Examples/minimalSystem
