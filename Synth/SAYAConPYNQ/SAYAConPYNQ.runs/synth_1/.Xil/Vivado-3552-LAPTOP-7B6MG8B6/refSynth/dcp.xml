@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Checkpoint Version="19" Minor="0">
+	<BUILD_NUMBER Name="3671981"/>
+	<FULL_BUILD Name="SW Build 3671981 on Fri Oct 14 05:00:03 MDT 2022"/>
+	<PRODUCT Name="Vivado v2022.2 (64-bit)"/>
+	<Part Name="xc7z020clg400-1"/>
+	<BoardPart Name="www.digilentinc.com:pynq-z1:part0:1.0"/>
+	<Top Name="SAYAC_TOP"/>
+	<DisableAutoIOBuffers Name="0"/>
+	<OutOfContext Name="0"/>
+	<RunGenerated Name="1"/>
+	<HDPlatform Name="0"/>
+	<File Type="VERILOG_STUB" Name="SAYAC_TOP_stub.v" ModTime="1666717151"/>
+	<File Type="VHDL_STUB" Name="SAYAC_TOP_stub.vhdl" ModTime="1666717151"/>
+	<File Type="EDIF" Name="SAYAC_TOP.edf" ModTime="1666717151"/>
+	<File Type="XN" Name="SAYAC_TOP.xn" ModTime="1666717151"/>
+	<File Type="INCR" Name="SAYAC_TOP.incr" ModTime="1666717151"/>
+	<File Type="RDA" Name="SAYAC_TOP.rda" ModTime="1666717151"/>
+	<File Type="JSON_RDA" Name="SAYAC_TOP_rda.json" ModTime="1666717151"/>
+	<File Type="WDF" Name="SAYAC_TOP.wdf" ModTime="1666717151"/>
+	<File Type="SYNTH" Name="SAYAC_TOP.synth" ModTime="1666717151"/>
+</Checkpoint>
+
